@@ -65,6 +65,7 @@ function buildBox(step, callback) {
   if (app.$activeBox) {
     app.$activeBox.style.display = 'none';
   }
+  app.$activeForm = step.$form;
   app.$activeBox = step.$box;
 
   if (callback) {
@@ -86,16 +87,33 @@ function init() {
     }
   }, false);
 
+  window.addEventListener('keyup', function(e) {
+    console.log(e);
+    if (e.keyCode === 37) {
+      previous();
+    } else if (e.keyCode === 39) {
+      next();
+    }
+  });
+
   buildBox(app.activeStep);
 }
 
 function next() {
   console.log('next');
+  if (app.activeStep === app.steps.length - 1) {
+    // TODO send a message or something
+    return;
+  }
   app.activeStep += 1; 
   app.$container.className = 'slide-out-next';
 }
 
 function previous() {
+  if (app.activeStep === 0) {
+    // TODO send a message or something
+    return;
+  }
   app.activeStep -= 1;
   app.$container.className = 'slide-out-previous';
 }
