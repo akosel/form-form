@@ -13,13 +13,13 @@ body {
 
 .slide-in-next {
   -webkit-animation-name: slideInNext;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: .5s;
 }
 
 .slide-out-next {
   margin-left: -200%;
   -webkit-animation-name: slideOutNext;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: .5s;
 }
 
 .slide-in-previous {

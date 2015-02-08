@@ -1,9 +1,9 @@
-var pfx = ["webkit", "moz", "MS", "o", ""];
-
 var app = {
   activeStep: 0,
-  steps: [
-    {
+  steps: 
+    [{
+      title: 'The Beginning',
+    }, {
       title: 'Step One',
       inputs: [
         {
@@ -12,18 +12,25 @@ var app = {
           required: true
         }
       ]
-    },
-    {
+    }, {
       title: 'Step Two',
       inputs: [
         {
           placeholder: 'How much do you want to spend?',
           type: 'number'
         }
-
       ]
-    }
-  ]
+    }, {
+      title: 'Step Three',
+      inputs: [
+        {
+          placeholder: 'When do you want to go?',
+          type: 'date'
+        }
+      ]
+    }, {
+      title: 'The End',
+    }]
 };
 
 function buildInput($target, inputObj) {
@@ -49,15 +56,20 @@ function buildBox(step, callback) {
   step.$title = document.createElement('h3');
   step.$title.textContent = step.title;
   step.$box.appendChild(step.$title);
-  step.$form = document.createElement('form');
-  step.$form.onsubmit = function(e) {
-    e.preventDefault();
-    return next();
-  };
-  step.$box.appendChild(step.$form);
+  if (step.inputs) {
+    step.$form = document.createElement('form');
+    step.$form.onsubmit = function(e) {
+      e.preventDefault();
+      return next();
+    };
+    step.$box.appendChild(step.$form);
 
-  for (var i = 0; i < step.inputs.length; i += 1) {
-    buildInput(step.$form, step.inputs[i]);
+    for (var i = 0; i < step.inputs.length; i += 1) {
+      buildInput(step.$form, step.inputs[i]);
+    }
+    app.$activeForm = step.$form;
+  } else {
+    app.$activeForm = null;
   }
 
   app.$container.appendChild(step.$box);
@@ -65,7 +77,6 @@ function buildBox(step, callback) {
   if (app.$activeBox) {
     app.$activeBox.style.display = 'none';
   }
-  app.$activeForm = step.$form;
   app.$activeBox = step.$box;
 
   if (callback) {
@@ -76,6 +87,9 @@ function buildBox(step, callback) {
 function init() {
   app.$container = document.querySelector('.container');
 
+  PrefixedEvent(app.$container, 'AnimationStart', function() {
+    app.processing = true;
+  });
   PrefixedEvent(app.$container, 'AnimationEnd', function() {
     var classNameArr = app.$container.className.split('-');
     console.log(classNameArr);
@@ -85,6 +99,7 @@ function init() {
         app.$container.className = classNameArr.join('-'); 
       });
     }
+    app.processing = false;
   }, false);
 
   window.addEventListener('keyup', function(e) {
@@ -101,7 +116,7 @@ function init() {
 
 function next() {
   console.log('next');
-  if (app.activeStep === app.steps.length - 1) {
+  if (app.activeStep === app.steps.length - 1 || app.processing) {
     // TODO send a message or something
     return;
   }
@@ -110,7 +125,7 @@ function next() {
 }
 
 function previous() {
-  if (app.activeStep === 0) {
+  if (app.activeStep === 0 || app.processing) {
     // TODO send a message or something
     return;
   }
@@ -118,6 +133,7 @@ function previous() {
   app.$container.className = 'slide-out-previous';
 }
 
+var pfx = ["webkit", "moz", "MS", "o", ""];
 function PrefixedEvent(element, type, callback) {
   for (var p = 0; p < pfx.length; p++) {
     if (!pfx[p]) type = type.toLowerCase();
