@@ -2,6 +2,11 @@ body {
   font-family: "Gill Sans", Montserrat, Helvetica;
   background-color: #F60; }
 
+.fade-in-and-out {
+  -webkit-animation-name: fadeInAndOut;
+  -webkit-animation-duration: 2s;
+  opacity: 0; }
+
 .slide-in-next {
   -webkit-animation-name: slideInNext;
   -webkit-animation-duration: .5s; }
@@ -82,6 +87,13 @@ input {
     opacity: 1; }
   to {
     margin-left: 100%;
+    opacity: 0; } }
+@-webkit-keyframes fadeInAndOut {
+  0% {
+    opacity: 0; }
+  20% {
+    opacity: 1; }
+  100% {
     opacity: 0; } }
 
 /*# sourceMappingURL=stylesheet.css.map */

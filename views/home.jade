@@ -6,3 +6,43 @@ html
     main
       section.container
   script(src='/js/formHandler.js')
+  script.
+    var app = [{
+          title: 'The Beginning'
+        }, {
+          title: 'Step One',
+          bgColor: '#BA5C12',
+          inputs: [
+            {
+              placeholder: 'Where do you want to go?',
+              type: 'text',
+              required: true
+            }
+          ]
+        }, {
+          title: 'Step Two',
+          bgColor: '#462255',
+          inputs: [
+            {
+              placeholder: 'How much do you want to spend?',
+              type: 'number'
+            }
+          ]
+        }, {
+          title: 'Step Three',
+          bgColor: '#1C6B7C',
+          inputs: [
+            {
+              placeholder: 'When do you want to go?',
+              type: 'date'
+            }
+          ]
+        }, {
+          title: 'The End',
+          bgColor: '#125E3B'
+    }];
+
+
+    var form = new FormHandler({
+      steps: app
+    });
