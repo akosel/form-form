@@ -4,26 +4,26 @@ body {
 
 .fade-in-and-out {
   -webkit-animation-name: fadeInAndOut;
-  -webkit-animation-duration: 2s;
+  -webkit-animation-duration: 2.5s;
   opacity: 0; }
 
 .slide-in-next {
   -webkit-animation-name: slideInNext;
-  -webkit-animation-duration: .5s; }
+  -webkit-animation-duration: .25s; }
 
 .slide-out-next {
   margin-left: -200%;
   -webkit-animation-name: slideOutNext;
-  -webkit-animation-duration: .5s; }
+  -webkit-animation-duration: .25s; }
 
 .slide-in-previous {
   -webkit-animation-name: slideInPrevious;
-  -webkit-animation-duration: 1s; }
+  -webkit-animation-duration: .25s; }
 
 .slide-out-previous {
   margin-left: -200%;
   -webkit-animation-name: slideOutPrevious;
-  -webkit-animation-duration: 1s; }
+  -webkit-animation-duration: .25s; }
 
 main article.box {
   font-size: 36px;
@@ -36,18 +36,6 @@ main article.box {
     main article.box {
       width: 300px; } }
 
-.go {
-  background-color: #27AE60;
-  color: white; }
-
-.set {
-  background-color: #FFD127;
-  color: white; }
-
-.ready {
-  background-color: #F60;
-  color: white; }
-
 .clearfix {
   overflow: auto; }
 
@@ -58,6 +46,20 @@ input {
   display: block;
   width: 100%;
   border: none; }
+
+button {
+  padding: 1em;
+  font-size: 36px;
+  font-family: "Gill Sans", Montserrat, Helvetica;
+  display: block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  color: white;
+  margin-top: 1em;
+  background-color: #27AE60; }
+  button:disabled {
+    background-color: #CCC; }
 
 @-webkit-keyframes slideInNext {
   from {
@@ -91,7 +93,7 @@ input {
 @-webkit-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-  20% {
+  10% {
     opacity: 1; }
   100% {
     opacity: 0; } }

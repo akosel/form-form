@@ -5,18 +5,24 @@ html
   body
     main
       section.container
+  script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?libraries=places")
   script(src='/js/formHandler.js')
   script.
     var app = [{
           title: 'The Beginning'
         }, {
           title: 'Step One',
-          bgColor: '#BA5C12',
+          bgColor: '#FACC12',
           inputs: [
             {
               placeholder: 'Where do you want to go?',
               type: 'text',
-              required: true
+              required: true,
+              places: true,
+              autofocus: true,
+              fn_print: function() {
+                return this.value;
+              }
             }
           ]
         }, {
@@ -25,7 +31,11 @@ html
           inputs: [
             {
               placeholder: 'How much do you want to spend?',
-              type: 'number'
+              type: 'number',
+              autofocus: true,
+              fn_print: function() {
+                return '$' + this.value;
+              }
             }
           ]
         }, {
@@ -34,11 +44,17 @@ html
           inputs: [
             {
               placeholder: 'When do you want to go?',
-              type: 'date'
+              type: 'date',
+              autofocus: true,
+              fn_print: function() {
+                var date = new Date(this.value);
+                return date.toLocaleDateString();
+              }
             }
           ]
         }, {
           title: 'The End',
+          showData: true,
           bgColor: '#125E3B'
     }];
 

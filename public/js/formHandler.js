@@ -5,8 +5,7 @@ window.FormHandler = function(args) {
   this.defaults = {
     activeStep: 0,
     steps: [{
-      title: 'You need to add the steps, dummy!',
-      bgColor: '#BADA55' 
+      title: 'You should initialize this with some steps'
     }] 
   };
   this.options = extend(this.defaults, args);
@@ -24,6 +23,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       console.log(e);
       self.options.processing = true;
     });
+
     PrefixedEvent(self.options.$container, 'AnimationEnd', function() {
       var classNameArr = self.options.$container.className.split('-');
       if (self.options.$container.className.match('slide-out')) {
@@ -53,27 +53,59 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     inputObj.$input = document.createElement('input');
     
     for (var i = 0; i < attributes.length; i += 1) {
-      inputObj.$input[attributes[i]] = inputObj[attributes[i]];
+      if (attributes[i] === 'places') {
+        var autocomplete = new google.maps.places.Autocomplete(inputObj.$input, { types: ['geocode'] });
+      } else if (attributes[i].match('fn')) {
+        continue; 
+      } else {
+        inputObj.$input[attributes[i]] = inputObj[attributes[i]];
+      }
     }
 
     inputObj.$input.addEventListener('keyup', function() {
+      inputObj.value = inputObj.$input.value;
+    });
+    inputObj.$input.addEventListener('focusout', function() {
       inputObj.value = inputObj.$input.value;
     });
 
     $target.appendChild(inputObj.$input);
   },
 
-  // XXX break this up
+  buildData: function($target) {
+    var $target = $target || this.options.$activeNotificationsPanel;
+    var formData = this.getFormData();
+    var dataObjKeys = Object.keys(this.getFormData()).reverse();
+    $target.innerHTML = null;
+
+    while (dataObjKeys.length) {
+      var $data = document.createElement('p');
+      var key = dataObjKeys.pop();
+      $data.textContent = [key, formData[key]].join(' ');
+      $target.appendChild($data);
+    }
+  },
+
+  changeBox: function(step) {
+      if (this.options.$activeBox) {
+        this.options.$activeBox.style.display = 'none';
+      }
+      this.options.$activeBox = step.$box;
+      this.options.$activeBox.style.display = 'block';
+      this.options.$activeForm = step.$form;
+      this.options.$activeNotificationsPanel = step.$notificationsPanel;
+      if (step.showData) {
+        this.buildData(step.$notificationsPanel);
+      }
+      this.options.$body.style.backgroundColor = step.bgColor || '#F60';
+  },
+
   buildBox: function(step, callback) {
     var self = this;
     var step = this.options.steps[step];
 
     if (step.$box) {
-      this.options.$activeBox.style.display = 'none';
-      this.options.$activeBox = step.$box;
-      this.options.$activeBox.style.display = 'block';
-      this.options.$activeNotificationsPanel = step.$notificationsPanel;
-      this.options.$body.style.backgroundColor = step.bgColor || '#F60';
+      this.changeBox(step);
       if (callback) {
         callback();
       }
@@ -89,57 +121,69 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
     if (step.inputs) {
       step.$form = document.createElement('form');
+      step.$form.addEventListener('keyup', function() {
+        if(step.$form.checkValidity()) {
+          setTimeout(function() {
+            step.$formSubmit.textContent = 'NEXT';
+            step.$formSubmit.disabled = false;
+          }, 1000);
+        } else {
+          step.$formSubmit.textContent = 'PLEASE FILL IN THE FORM';
+          step.$formSubmit.disabled = true;
+        }
+      });
       step.$form.onsubmit = function(e) {
         e.preventDefault();
-        return this.next();
+        if (step.$form.querySelector('input').validity) {
+          return self.next();
+        }
       };
       step.$box.appendChild(step.$form);
 
       for (var i = 0; i < step.inputs.length; i += 1) {
         this.buildInput(step.$form, step.inputs[i]);
       }
-      this.options.$activeForm = step.$form;
-    } else {
-      this.options.$activeForm = null;
+      step.$formSubmit = document.createElement('button');
+      step.$formSubmit.textContent = 'PLEASE FILL IN THE FORM';
+      step.$formSubmit.disabled = true;
+      step.$form.appendChild(step.$formSubmit);
     }
 
-    step.$notificationsPanel = document.createElement('p');
+    step.$notificationsPanel = document.createElement('div');
     step.$notificationsPanel.className = 'notifications';
     PrefixedEvent(step.$notificationsPanel, 'AnimationEnd', function(e) {
       self.clearNotification();
     }, true);
     step.$box.appendChild(step.$notificationsPanel);
 
-    this.options.$body.style.backgroundColor = step.bgColor || '#F60';
     this.options.$container.appendChild(step.$box);
 
-    if (this.options.$activeBox) {
-      this.options.$activeBox.style.display = 'none';
-    }
-    this.options.$activeBox = step.$box;
-    this.options.$activeNotificationsPanel = step.$notificationsPanel;
-
+    this.changeBox(step);
     if (callback) {
       callback();
     }
   },
 
   sendNotification: function(msg) {
-    var self = this;
-    this.options.$activeNotificationsPanel.className = 'fade-in-and-out';
-    this.options.$activeNotificationsPanel.textContent = msg; 
+    var $msg = document.createElement('p');
+    $msg.textContent = msg;
+    $msg.className = 'fade-in-and-out';
+
+    this.options.$activeNotificationsPanel.appendChild($msg);
   },
 
   clearNotification: function() {
-    this.options.$activeNotificationsPanel.className = null;
-    this.options.$activeNotificationsPanel.textContent = null; 
+    this.options.$activeNotificationsPanel.querySelector('.fade-in-and-out').remove();
   },
 
   next: function(){
     if (this.options.activeStep === this.options.steps.length - 1) {
-      this.sendNotification('This is the last step.');
+      this.sendNotification('You may go no further.');
       return;
     } else if (this.options.processing) {
+      return;
+    } else if (this.options.$activeForm && !this.options.$activeForm.checkValidity()) {
+      this.sendNotification('Whoops, looks like you still need to fill in a field!');
       return;
     }
     this.options.activeStep += 1; 
@@ -155,6 +199,18 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     }
     this.options.activeStep -= 1;
     this.options.$container.className = 'slide-out-previous';
+  },
+
+  getFormData: function() {
+    var formData = {};
+    this.options.steps.forEach(function(step) {
+      if (step.inputs && step.inputs.length) {
+        step.inputs.forEach(function(input) {
+          formData[input.placeholder] = input.fn_print();
+        });
+      }
+    });
+    return formData;
   }
 
 });
