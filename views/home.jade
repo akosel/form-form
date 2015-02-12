@@ -3,13 +3,11 @@ html
     meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
     link(rel='stylesheet', href='/css/stylesheet.css')
   body
-    main
-      section.container
   script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?libraries=places")
   script(src='/js/formHandler.js')
   script.
     var app = [{
-          title: 'The Beginning'
+          title: 'The Beginning: Press the right arrow key to get started'
         }, {
           title: 'Step One',
           bgColor: '#FACC12',
@@ -17,10 +15,14 @@ html
             {
               placeholder: 'Where do you want to go?',
               type: 'text',
+              name: 'location',
               required: true,
               places: true,
               autofocus: true,
               fn_print: function() {
+                return this.value;
+              },
+              fn_dbFormat: function() {
                 return this.value;
               }
             }
@@ -31,10 +33,14 @@ html
           inputs: [
             {
               placeholder: 'How much do you want to spend?',
+              name: 'cost',
               type: 'number',
               autofocus: true,
               fn_print: function() {
                 return '$' + this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
               }
             }
           ]
@@ -45,10 +51,15 @@ html
             {
               placeholder: 'When do you want to go?',
               type: 'date',
+              name: 'date',
               autofocus: true,
               fn_print: function() {
                 var date = new Date(this.value);
                 return date.toLocaleDateString();
+              },
+              fn_dbFormat: function() {
+                var date = new Date(this.value);
+                return date;
               }
             }
           ]

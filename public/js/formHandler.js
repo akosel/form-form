@@ -16,8 +16,11 @@ window.FormHandler = function(args) {
 FormHandler.prototype = extend(FormHandler.prototype, {
   init: function() {
     var self = this;
+    this.options.$main = document.createElement('main');
+    this.options.$container = document.createElement('section');
     this.options.$body = document.querySelector('body');
-    this.options.$container = document.querySelector('.container');
+    this.options.$main.appendChild(this.options.$container);
+    this.options.$body.appendChild(this.options.$main);
 
     PrefixedEvent(self.options.$container, 'AnimationStart', function(e) {
       console.log(e);
@@ -32,7 +35,6 @@ FormHandler.prototype = extend(FormHandler.prototype, {
           self.options.$container.className = classNameArr.join('-'); 
         });
       }
-      console.log('done');
 
       self.options.processing = false;
     }, false);
@@ -179,6 +181,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   next: function(){
     if (this.options.activeStep === this.options.steps.length - 1) {
       this.sendNotification('You may go no further.');
+      this.post('/vacations', JSON.stringify(this.getPostData()));
       return;
     } else if (this.options.processing) {
       return;
@@ -211,13 +214,30 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       }
     });
     return formData;
+  },
+
+  getPostData: function() {
+    var formData = {};
+    this.options.steps.forEach(function(step) {
+      if (step.inputs && step.inputs.length) {
+        step.inputs.forEach(function(input) {
+          formData[input.name] = input.fn_dbFormat();
+        });
+      }
+    });
+    return formData;
+  },
+
+  post: function(url, json) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', url);
+    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
+    xhr.send(json);
   }
 
 });
 
 })(window);
-
-
 
 // TODO put these utility functions in a separate place
 var pfx = ["webkit", "moz", "MS", "o", ""];
