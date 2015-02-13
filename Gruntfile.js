@@ -9,7 +9,8 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         files: {
-          'public/css/stylesheet.css': 'public/sass/stylesheet.scss'
+          'public/css/stylesheet.css': 'public/sass/stylesheet.scss',
+          'public/css/font-awesome.css': 'public/sass/font-awesome.scss'
         }
       }
     },

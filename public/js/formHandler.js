@@ -102,6 +102,18 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       this.options.$body.style.backgroundColor = step.bgColor || '#F60';
   },
 
+  flashArrows: function() {
+    var rClasses = document.querySelector('.right.arrow').className;
+    var lClasses = document.querySelector('.left.arrow').className;
+
+    document.querySelector('.right.arrow').className += ' fade-in-and-out';
+    document.querySelector('.left.arrow').className += ' fade-in-and-out';
+    setTimeout(function() {
+      document.querySelector('.right.arrow').className = rClasses;
+      document.querySelector('.left.arrow').className = lClasses;
+    }, 5000);
+  },
+
   buildBox: function(step, callback) {
     var self = this;
     var step = this.options.steps[step];

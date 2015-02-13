@@ -2,6 +2,16 @@ body {
   font-family: "Gill Sans", Montserrat, Helvetica;
   background-color: #F60; }
 
+.arrow {
+  position: fixed;
+  top: 50%;
+  line-height: 0;
+  color: white;
+  font-size: 10em;
+  opacity: 0; }
+  .arrow.right {
+    right: 10px; }
+
 .fade-in-and-out {
   -webkit-animation-name: fadeInAndOut;
   -webkit-animation-duration: 2.5s;
