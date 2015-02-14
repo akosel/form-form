@@ -75,7 +75,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   },
 
   buildData: function($target) {
-    var $target = $target || this.options.$activeNotificationsPanel;
+    $target = $target || this.options.$activeNotificationsPanel;
     var formData = this.getFormData();
     var dataObjKeys = Object.keys(this.getFormData()).reverse();
     $target.innerHTML = null;
@@ -116,7 +116,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
   buildBox: function(step, callback) {
     var self = this;
-    var step = this.options.steps[step];
+    step = this.options.steps[step];
 
     if (step.$box) {
       this.changeBox(step);
@@ -136,11 +136,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     if (step.inputs) {
       step.$form = document.createElement('form');
       step.$form.addEventListener('keyup', function() {
+        if (step.keyTimeout) {
+          clearInterval(step.keyTimeout);
+        }
         if(step.$form.checkValidity()) {
-          setTimeout(function() {
+          step.keyTimeout = setTimeout(function() {
             step.$formSubmit.textContent = 'NEXT';
             step.$formSubmit.disabled = false;
-          }, 1000);
+          }, 500);
         } else {
           step.$formSubmit.textContent = 'PLEASE FILL IN THE FORM';
           step.$formSubmit.disabled = true;
@@ -221,7 +224,9 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     this.options.steps.forEach(function(step) {
       if (step.inputs && step.inputs.length) {
         step.inputs.forEach(function(input) {
-          formData[input.placeholder] = input.fn_print();
+          if (input.value && input.placeholder) {
+            formData[input.placeholder] = input.fn_print();
+          }
         });
       }
     });
@@ -254,7 +259,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 // TODO put these utility functions in a separate place
 var pfx = ["webkit", "moz", "MS", "o", ""];
 function PrefixedEvent(element, type, callback, useCapture) {
-  var useCapture = useCapture || false;
+  useCapture = useCapture || false;
   console.log(element, useCapture);
   for (var p = 0; p < pfx.length; p++) {
     if (!pfx[p]) type = type.toLowerCase();
@@ -282,4 +287,4 @@ function extend( defaults, options ) {
     }
   }
   return extended;
-};
+}
