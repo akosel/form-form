@@ -115,6 +115,9 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       this.options.$activeBox = step.$box;
       this.options.$activeBox.style.display = 'block';
       this.options.$activeForm = step.$form;
+      if (this.options.$activeForm) {
+        this.options.$activeForm.querySelector('input').focus();
+      }
       this.options.$activeNotificationsPanel = step.$notificationsPanel;
       if (step.showData) {
         this.buildData(step.$notificationsPanel);
@@ -215,6 +218,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     }
   },
 
+  // send a temporary notification
   sendNotification: function(msg) {
     var $msg = document.createElement('p');
     $msg.textContent = msg;
@@ -223,10 +227,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     this.options.$activeNotificationsPanel.appendChild($msg);
   },
 
+  // remove notifications
   clearNotification: function() {
     this.options.$activeNotificationsPanel.querySelector('.fade-in-and-out').remove();
   },
 
+  // move to the next step
   next: function(){
     if (this.options.activeStep === this.options.steps.length - 1) {
       this.sendNotification('You may go no further.');
@@ -242,6 +248,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     this.options.$container.className = 'slide-out-next';
   },
 
+  // go back a step
   previous: function() {
     if (this.options.activeStep === 0) {
       this.sendNotification('You can\'t go back any further.');
@@ -253,6 +260,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     this.options.$container.className = 'slide-out-previous';
   },
 
+  // set up an object for easy printing of all the data
   getFormData: function() {
     var formData = {};
     this.options.steps.forEach(function(step) {
@@ -267,6 +275,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     return formData;
   },
 
+  // get data specifically for updating the db
   getPostData: function() {
     var formData = {};
     this.options.steps.forEach(function(step) {
@@ -279,6 +288,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     return formData;
   },
 
+  // post some json to a given url. this really doesn't belong in the form handler XXX 
   post: function(url, json) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);

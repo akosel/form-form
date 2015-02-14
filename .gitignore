@@ -1,2 +1,4 @@
 node_modules
 .sass-cache
+views/home.jade
+models/*.js
