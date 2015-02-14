@@ -57,7 +57,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   },
 
   buildInput: function($target, inputObj) {
-    var attributes = Object.keys(inputObj);
+    var attributes = Object.keys(inputObj.attributes);
     inputObj.$input = document.createElement('input');
     
     for (var i = 0; i < attributes.length; i += 1) {
@@ -66,7 +66,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       } else if (attributes[i].match('fn')) {
         continue; 
       } else {
-        inputObj.$input[attributes[i]] = inputObj[attributes[i]];
+        inputObj.$input[attributes[i]] = inputObj.attributes[attributes[i]];
       }
     }
 
@@ -78,6 +78,27 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     });
 
     $target.appendChild(inputObj.$input);
+  },
+
+  buildSelect: function($target, selectObj) {
+    var attributes = Object.keys(selectObj.attributes);
+    selectObj.$select = document.createElement('select'); 
+
+    for (var i = 0; i < attributes.length; i += 1) {
+      selectObj.$select[attributes[i]] = selectObj.attributes[attributes[i]];
+    }
+    selectObj.$select.addEventListener('onchange', function() {
+      selectObj.value = inputObj.$select.value;
+    });
+
+    var $newOpt;
+    for (i = 0; i < selectObj.options.length; i += 1) {
+      $newOpt = document.createElement('option');
+      $newOpt.textContent = selectObj.options[i];
+      selectObj.$select.appendChild($newOpt);
+    }
+
+    $target.appendChild(selectObj.$select);
   },
 
   buildData: function($target) {
@@ -119,9 +140,6 @@ FormHandler.prototype = extend(FormHandler.prototype, {
         this.options.$activeForm.querySelector('input').focus();
       }
       this.options.$activeNotificationsPanel = step.$notificationsPanel;
-      if (step.showData) {
-        this.buildData(step.$notificationsPanel);
-      }
       this.options.$body.style.backgroundColor = step.bgColor || '#F60';
   },
 
@@ -153,8 +171,17 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     step.$description.textContent = step.description;
     step.$box.appendChild(step.$description);
 
+    if (step.showData) {
+      this.buildData(step.$notificationsPanel);
+    }
+
+    // set up notifications panel
+    step.$notificationsPanel = document.createElement('div');
+    step.$notificationsPanel.className = 'notifications';
+    step.$box.appendChild(step.$notificationsPanel);
+
     // build the form, if any inputs are configured 
-    if (step.inputs) {
+    if (step.formElements) {
       // set up the form
       step.$form = document.createElement('form');
       step.$box.appendChild(step.$form);
@@ -187,8 +214,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       };
 
       // create the actual input elements
-      for (var i = 0; i < step.inputs.length; i += 1) {
-        this.buildInput(step.$form, step.inputs[i]);
+      for (var i = 0; i < step.formElements.length; i += 1) {
+        if (step.formElements[i].tagName === 'select') {
+          this.buildSelect(step.$form, step.formElements[i]);
+        } else {
+          this.buildInput(step.$form, step.formElements[i]);
+        }
       }
       
       // set up form submit button
@@ -197,11 +228,6 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       step.$formSubmit.textContent = 'PLEASE FILL IN THE FORM';
       step.$formSubmit.disabled = true;
     }
-
-    // set up notifications panel
-    step.$notificationsPanel = document.createElement('div');
-    step.$notificationsPanel.className = 'notifications';
-    step.$box.appendChild(step.$notificationsPanel);
 
     // add listener for animations on the notifications panel
     PrefixedEvent(step.$notificationsPanel, 'AnimationEnd', function(e) {
@@ -236,9 +262,10 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   next: function(){
     if (this.options.activeStep === this.options.steps.length - 1) {
       this.sendNotification('You may go no further.');
-      this.post('/vacations', JSON.stringify(this.getPostData()));
       return;
-    } else if (this.options.processing) {
+    } else if (this.options.activeStep === this.options.steps.length - 2) {
+      this.post('/vacations', JSON.stringify(this.getPostData('vacation')));
+    }else if (this.options.processing) {
       return;
     } else if (this.options.$activeForm && !this.options.$activeForm.checkValidity()) {
       this.sendNotification('Whoops, looks like you still need to fill in a field!');
@@ -264,10 +291,10 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   getFormData: function() {
     var formData = {};
     this.options.steps.forEach(function(step) {
-      if (step.inputs && step.inputs.length) {
-        step.inputs.forEach(function(input) {
-          if (input.value && input.placeholder) {
-            formData[input.placeholder] = input.fn_print();
+      if (step.formElements && step.formElements.length) {
+        step.formElements.forEach(function(input) {
+          if (input.value && input.attributes.placeholder) {
+            formData[input.attributes.placeholder] = input.fn_print();
           }
         });
       }
@@ -276,12 +303,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   },
 
   // get data specifically for updating the db
-  getPostData: function() {
+  getPostData: function(model) {
     var formData = {};
     this.options.steps.forEach(function(step) {
-      if (step.inputs && step.inputs.length) {
-        step.inputs.forEach(function(input) {
-          formData[input.name] = input.fn_dbFormat();
+      if (step.formElements && step.formElements.length) {
+        step.formElements.forEach(function(input) {
+          if (input.modelName === model) {
+            formData[input.attributes.name] = input.fn_dbFormat();
+          }
         });
       }
     });

@@ -1,0 +1,138 @@
+html
+  head
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no")
+    link(rel='stylesheet', href='/css/stylesheet.css')
+    link(rel='stylesheet', href='/css/font-awesome.css')
+  body
+    div.left.arrow
+      i.fa.fa-arrow-left.fa-1
+    div.right.arrow
+      i.fa.fa-arrow-right.fa-1
+  script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?libraries=places")
+  script(src='/js/formHandler.js')
+  script.
+    var app = [{
+          title: 'Press the right arrow key to get started!',
+          description: 'No partner, no problem! VayKay matches you with other travelers so you can share your travel experiences.'
+        }, {
+          title: 'Location. Location. Location.',
+          bgColor: '#FACC12',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'Where do you want to go?',
+                type: 'text',
+                name: 'location',
+                required: true,
+                places: true,
+                autofocus: true
+              },
+              fn_print: function() {
+                return this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+        }, {
+          title: 'Dolla Dolla Billz Y\'all',
+          bgColor: '#462255',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'How much do you want to spend?',
+                name: 'cost',
+                type: 'number',
+                autofocus: true
+              },
+              fn_print: function() {
+                return '$' + this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+        }, {
+          title: 'Set the date',
+          bgColor: '#1C6B7C',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'When do you want to go?',
+                type: 'date',
+                name: 'date',
+                autofocus: true,
+              },
+              fn_print: function() {
+                var date = new Date(this.value);
+                return date.toLocaleDateString();
+              },
+              fn_dbFormat: function() {
+                var date = new Date(this.value);
+                return date;
+              }
+            },
+            {
+              tagName: 'select',
+              modelName: 'vacation',
+              placeholder: 'About how long do you want to be gone?',
+              value: 'A week',
+              attributes: {
+                name: 'duration',
+                placeholder: 'About how long do you want to be gone?'
+              },
+              options: [
+                'A week',
+                'Two Weeks',
+                'Three Weeks',
+                'A month',
+                'A long, long time'
+              ],
+              fn_print: function() {
+                return this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+        }, {
+          title: 'This is it.',
+          description: 'Ok, after you review everything, enter your email below. When we find someone interested in joining you, we will let you review them first before setting up contact.',
+          showData: true,
+          bgColor: '#125E3B',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'user',
+              attributes: {
+                placeholder: 'What is your email?',
+                name: 'email',
+                type: 'email',
+                autofocus: true
+              },
+              fn_print: function() {
+                return this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+    }, {
+      title: 'Done.',
+      description: 'Awesome! We will be in touch soon.'
+    }];
+
+
+    var form = new FormHandler({
+      steps: app
+    });
