@@ -139,6 +139,9 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       if (this.options.$activeForm) {
         this.options.$activeForm.querySelector('input').focus();
       }
+      if (step.showData) {
+        this.buildData(step.$notificationsPanel);
+      }
       this.options.$activeNotificationsPanel = step.$notificationsPanel;
       this.options.$body.style.backgroundColor = step.bgColor || '#F60';
   },
@@ -170,10 +173,6 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     step.$description = document.createElement('p');
     step.$description.textContent = step.description;
     step.$box.appendChild(step.$description);
-
-    if (step.showData) {
-      this.buildData(step.$notificationsPanel);
-    }
 
     // set up notifications panel
     step.$notificationsPanel = document.createElement('div');
