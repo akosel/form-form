@@ -1,0 +1,79 @@
+.fade-in-and-out {
+  @include animation('fadeInAndOut 2.5s');
+  opacity: 0;
+}
+
+.slide-in-next {
+  @include animation('slideInNext .25s');
+}
+
+.slide-out-next {
+  margin-left: -200%;
+  @include animation('slideOutNext .25s');
+}
+
+.slide-in-previous {
+  @include animation('slideInPrevious .25s');
+}
+
+.slide-out-previous {
+  margin-left: -200%;
+  @include animation('slideOutPrevious .25s');
+}
+
+@include keyframes(slideInNext) {
+  from {
+    margin-left: 100%;
+    width: 300%;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1;
+  }
+}
+
+@include keyframes(slideOutNext) {
+  from {
+    margin-left: 0%;
+  }
+  to {
+    margin-left: -200%;
+    opacity: 0;
+  }
+}
+
+@include keyframes(slideInPrevious) {
+  from {
+    margin-left: -200%;
+    opacity: 0;
+  }
+  to {
+    margin-left: 0%;
+    opacity: 1;
+  }
+}
+
+@include keyframes(slideOutPrevious) {
+  from {
+    margin-left: 0%;
+    opacity: 1;
+  }
+  to {
+    margin-left: 100%;
+    opacity: 0;
+  }
+}
+
+@include keyframes(fadeInAndOut) {
+  0% {
+    opacity: 0
+  }
+  10% {
+    opacity: 1
+  }
+  100% {
+    opacity: 0
+  }
+}

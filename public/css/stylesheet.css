@@ -1,6 +1,279 @@
+.fade-in-and-out {
+  -webkit-animation: fadeInAndOut 2.5s;
+  -moz-animation: fadeInAndOut 2.5s;
+  -ms-animation: fadeInAndOut 2.5s;
+  -o-animation: fadeInAndOut 2.5s;
+  animation: fadeInAndOut 2.5s;
+  opacity: 0; }
+
+.slide-in-next {
+  -webkit-animation: slideInNext .25s;
+  -moz-animation: slideInNext .25s;
+  -ms-animation: slideInNext .25s;
+  -o-animation: slideInNext .25s;
+  animation: slideInNext .25s; }
+
+.slide-out-next {
+  margin-left: -200%;
+  -webkit-animation: slideOutNext .25s;
+  -moz-animation: slideOutNext .25s;
+  -ms-animation: slideOutNext .25s;
+  -o-animation: slideOutNext .25s;
+  animation: slideOutNext .25s; }
+
+.slide-in-previous {
+  -webkit-animation: slideInPrevious .25s;
+  -moz-animation: slideInPrevious .25s;
+  -ms-animation: slideInPrevious .25s;
+  -o-animation: slideInPrevious .25s;
+  animation: slideInPrevious .25s; }
+
+.slide-out-previous {
+  margin-left: -200%;
+  -webkit-animation: slideOutPrevious .25s;
+  -moz-animation: slideOutPrevious .25s;
+  -ms-animation: slideOutPrevious .25s;
+  -o-animation: slideOutPrevious .25s;
+  animation: slideOutPrevious .25s; }
+
+@-webkit-keyframes slideInNext {
+  from {
+    margin-left: 100%;
+    width: 300%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; } }
+
+@-moz-keyframes slideInNext {
+  from {
+    margin-left: 100%;
+    width: 300%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; } }
+
+@-ms-keyframes slideInNext {
+  from {
+    margin-left: 100%;
+    width: 300%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; } }
+
+@-o-keyframes slideInNext {
+  from {
+    margin-left: 100%;
+    width: 300%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; } }
+
+@keyframes slideInNext {
+  from {
+    margin-left: 100%;
+    width: 300%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    width: 100%;
+    opacity: 1; } }
+
+@-webkit-keyframes slideOutNext {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -200%;
+    opacity: 0; } }
+
+@-moz-keyframes slideOutNext {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -200%;
+    opacity: 0; } }
+
+@-ms-keyframes slideOutNext {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -200%;
+    opacity: 0; } }
+
+@-o-keyframes slideOutNext {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -200%;
+    opacity: 0; } }
+
+@keyframes slideOutNext {
+  from {
+    margin-left: 0%; }
+
+  to {
+    margin-left: -200%;
+    opacity: 0; } }
+
+@-webkit-keyframes slideInPrevious {
+  from {
+    margin-left: -200%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    opacity: 1; } }
+
+@-moz-keyframes slideInPrevious {
+  from {
+    margin-left: -200%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    opacity: 1; } }
+
+@-ms-keyframes slideInPrevious {
+  from {
+    margin-left: -200%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    opacity: 1; } }
+
+@-o-keyframes slideInPrevious {
+  from {
+    margin-left: -200%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    opacity: 1; } }
+
+@keyframes slideInPrevious {
+  from {
+    margin-left: -200%;
+    opacity: 0; }
+
+  to {
+    margin-left: 0%;
+    opacity: 1; } }
+
+@-webkit-keyframes slideOutPrevious {
+  from {
+    margin-left: 0%;
+    opacity: 1; }
+
+  to {
+    margin-left: 100%;
+    opacity: 0; } }
+
+@-moz-keyframes slideOutPrevious {
+  from {
+    margin-left: 0%;
+    opacity: 1; }
+
+  to {
+    margin-left: 100%;
+    opacity: 0; } }
+
+@-ms-keyframes slideOutPrevious {
+  from {
+    margin-left: 0%;
+    opacity: 1; }
+
+  to {
+    margin-left: 100%;
+    opacity: 0; } }
+
+@-o-keyframes slideOutPrevious {
+  from {
+    margin-left: 0%;
+    opacity: 1; }
+
+  to {
+    margin-left: 100%;
+    opacity: 0; } }
+
+@keyframes slideOutPrevious {
+  from {
+    margin-left: 0%;
+    opacity: 1; }
+
+  to {
+    margin-left: 100%;
+    opacity: 0; } }
+
+@-webkit-keyframes fadeInAndOut {
+  0% {
+    opacity: 0; }
+
+  10% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@-moz-keyframes fadeInAndOut {
+  0% {
+    opacity: 0; }
+
+  10% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@-ms-keyframes fadeInAndOut {
+  0% {
+    opacity: 0; }
+
+  10% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@-o-keyframes fadeInAndOut {
+  0% {
+    opacity: 0; }
+
+  10% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
+@keyframes fadeInAndOut {
+  0% {
+    opacity: 0; }
+
+  10% {
+    opacity: 1; }
+
+  100% {
+    opacity: 0; } }
+
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
-  background-color: #F60; }
+  background-color: #ff6600; }
 
 .arrow {
   position: fixed;
@@ -11,29 +284,6 @@ body {
   opacity: 0; }
   .arrow.right {
     right: 10px; }
-
-.fade-in-and-out {
-  -webkit-animation-name: fadeInAndOut;
-  -webkit-animation-duration: 2.5s;
-  opacity: 0; }
-
-.slide-in-next {
-  -webkit-animation-name: slideInNext;
-  -webkit-animation-duration: .25s; }
-
-.slide-out-next {
-  margin-left: -200%;
-  -webkit-animation-name: slideOutNext;
-  -webkit-animation-duration: .25s; }
-
-.slide-in-previous {
-  -webkit-animation-name: slideInPrevious;
-  -webkit-animation-duration: .25s; }
-
-.slide-out-previous {
-  margin-left: -200%;
-  -webkit-animation-name: slideOutPrevious;
-  -webkit-animation-duration: .25s; }
 
 main article.box {
   font-size: 36px;
@@ -56,6 +306,8 @@ input {
   display: block;
   width: 100%;
   border: none; }
+  input:not(:first-child) {
+    margin-top: 10px; }
 
 button {
   padding: 1em;
@@ -67,45 +319,16 @@ button {
   cursor: pointer;
   color: white;
   margin-top: 1em;
-  background-color: #27AE60; }
+  background-color: #27ae60;
+  -webkit-transition: background-color 0.3s ease;
+  -moz-transition: background-color 0.3s ease;
+  -ms-transition: background-color 0.3s ease;
+  -o-transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease; }
   button:disabled {
     background-color: #CCC; }
-
-@-webkit-keyframes slideInNext {
-  from {
-    margin-left: 100%;
-    width: 300%;
-    opacity: 0; }
-  to {
-    margin-left: 0%;
-    width: 100%;
-    opacity: 1; } }
-@-webkit-keyframes slideOutNext {
-  from {
-    margin-left: 0%; }
-  to {
-    margin-left: -200%;
-    opacity: 0; } }
-@-webkit-keyframes slideInPrevious {
-  from {
-    margin-left: -200%;
-    opacity: 0; }
-  to {
-    margin-left: 0%;
-    opacity: 1; } }
-@-webkit-keyframes slideOutPrevious {
-  from {
-    margin-left: 0%;
-    opacity: 1; }
-  to {
-    margin-left: 100%;
-    opacity: 0; } }
-@-webkit-keyframes fadeInAndOut {
-  0% {
-    opacity: 0; }
-  10% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-
-/*# sourceMappingURL=stylesheet.css.map */
+    button:disabled:hover {
+      background-color: #CCC;
+      cursor: default; }
+  button:hover {
+    background-color: #36d278; }

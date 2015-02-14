@@ -22,12 +22,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     this.options.$main.appendChild(this.options.$container);
     this.options.$body.appendChild(this.options.$main);
 
+    // set listener for animation starts across the page. 
     PrefixedEvent(self.options.$container, 'AnimationStart', function(e) {
-      console.log(e);
+      console.log('PROCESSING: ', e);
       self.options.processing = true;
     });
 
-    PrefixedEvent(self.options.$container, 'AnimationEnd', function() {
+    // catch all animation events. special case for the container. a little messy.
+    PrefixedEvent(self.options.$container, 'AnimationEnd', function(e) {
       var classNameArr = self.options.$container.className.split('-');
       if (self.options.$container.className.match('slide-out')) {
         self.buildBox(self.options.activeStep, function() {
@@ -36,10 +38,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
         });
       }
 
+      console.log('PROCESSING END: ', e);
       self.options.processing = false;
     }, false);
 
+    // allow left and right navigation
     window.addEventListener('keyup', function(e) {
+      e.stopPropagation();
+
       if (e.keyCode === 37) {
         self.previous();
       } else if (e.keyCode === 39) {
@@ -88,6 +94,20 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     }
   },
 
+  // XXX this needs work
+  flashArrows: function() {
+    var rClasses = document.querySelector('.right.arrow').className;
+    var lClasses = document.querySelector('.left.arrow').className;
+
+    document.querySelector('.right.arrow').className += ' fade-in-and-out';
+    document.querySelector('.left.arrow').className += ' fade-in-and-out';
+    setTimeout(function() {
+      document.querySelector('.right.arrow').className = rClasses;
+      document.querySelector('.left.arrow').className = lClasses;
+    }, 5000);
+  },
+
+  // updates state for the form-form
   changeBox: function(step) {
       if (this.options.$activeBox) {
         this.options.$activeBox.style.display = 'none';
@@ -102,22 +122,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       this.options.$body.style.backgroundColor = step.bgColor || '#F60';
   },
 
-  flashArrows: function() {
-    var rClasses = document.querySelector('.right.arrow').className;
-    var lClasses = document.querySelector('.left.arrow').className;
-
-    document.querySelector('.right.arrow').className += ' fade-in-and-out';
-    document.querySelector('.left.arrow').className += ' fade-in-and-out';
-    setTimeout(function() {
-      document.querySelector('.right.arrow').className = rClasses;
-      document.querySelector('.left.arrow').className = lClasses;
-    }, 5000);
-  },
-
+  // builds a box, or changes to a previously created box, if it exists 
   buildBox: function(step, callback) {
     var self = this;
     step = this.options.steps[step];
 
+    // if the box exists, change it and perform the callback
     if (step.$box) {
       this.changeBox(step);
       if (callback) {
@@ -126,19 +136,34 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       return;
     }
 
-    step.$title = document.createElement('h3');
-    step.$title.textContent = step.title;
-
+    // set up the box that will contain everything
     step.$box = document.createElement('article');
     step.$box.className = 'box';
+
+    // set up the header text
+    step.$title = document.createElement('h3');
+    step.$title.textContent = step.title;
     step.$box.appendChild(step.$title);
 
+    // set up the description text 
+    step.$description = document.createElement('p');
+    step.$description.textContent = step.description;
+    step.$box.appendChild(step.$description);
+
+    // build the form, if any inputs are configured 
     if (step.inputs) {
+      // set up the form
       step.$form = document.createElement('form');
+      step.$box.appendChild(step.$form);
+
+      // set up custom validation events
       step.$form.addEventListener('keyup', function() {
+        // if there was a timeout event, clear it to allow for continued feedback
         if (step.keyTimeout) {
           clearInterval(step.keyTimeout);
         }
+        
+        // if valid, wait 500ms, then enable and change text. otherwise, disable.
         if(step.$form.checkValidity()) {
           step.keyTimeout = setTimeout(function() {
             step.$formSubmit.textContent = 'NEXT';
@@ -149,32 +174,41 @@ FormHandler.prototype = extend(FormHandler.prototype, {
           step.$formSubmit.disabled = true;
         }
       });
+
+      // allow normal submitting, but block if form is invalid
       step.$form.onsubmit = function(e) {
         e.preventDefault();
         if (step.$form.querySelector('input').validity) {
           return self.next();
         }
       };
-      step.$box.appendChild(step.$form);
 
+      // create the actual input elements
       for (var i = 0; i < step.inputs.length; i += 1) {
         this.buildInput(step.$form, step.inputs[i]);
       }
+      
+      // set up form submit button
       step.$formSubmit = document.createElement('button');
+      step.$form.appendChild(step.$formSubmit);
       step.$formSubmit.textContent = 'PLEASE FILL IN THE FORM';
       step.$formSubmit.disabled = true;
-      step.$form.appendChild(step.$formSubmit);
     }
 
+    // set up notifications panel
     step.$notificationsPanel = document.createElement('div');
     step.$notificationsPanel.className = 'notifications';
+    step.$box.appendChild(step.$notificationsPanel);
+
+    // add listener for animations on the notifications panel
     PrefixedEvent(step.$notificationsPanel, 'AnimationEnd', function(e) {
       self.clearNotification();
     }, true);
-    step.$box.appendChild(step.$notificationsPanel);
 
+    // finally, append the box with everything into the main container
     this.options.$container.appendChild(step.$box);
 
+    // call change box to sync active elements
     this.changeBox(step);
     if (callback) {
       callback();

@@ -1,0 +1,76 @@
+body {
+  font-family: $font-stack;
+  background-color: $red;
+}
+
+.arrow {
+  position: fixed;
+  top: 50%;
+  line-height: 0;
+  color: white;
+  font-size:10em;
+  opacity: 0;
+
+
+  &.right {
+    right: 10px;
+  }
+}
+
+main {
+  article.box {
+    font-size: 36px;
+    line-height: 2em;
+    margin: 0 auto;
+    overflow: visible;
+    width: 1024px;
+    color: white;
+    @media #{$media-phone} {
+      width: 300px;
+    }
+  }
+
+}
+
+.clearfix {
+  overflow: auto;
+}
+
+input {
+  padding: 1em;
+  font-size: 36px;
+  font-family: $font-stack;
+  display: block;
+  width: 100%;
+  border: none;
+  &:not(:first-child) {
+    margin-top: 10px;
+  }
+}
+
+button {
+  padding: 1em;
+  font-size: 36px;
+  font-family: $font-stack;
+  display: block;
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  color: white;
+  margin-top: 1em;
+  background-color: $green;
+  @include transition(background-color .3s ease);
+
+
+  &:disabled {
+    background-color: #CCC;
+    &:hover {
+      background-color: #CCC;
+      cursor: default;
+    }
+  }
+
+  &:hover {
+    background-color: lighten($green, 10%);
+  }
+}

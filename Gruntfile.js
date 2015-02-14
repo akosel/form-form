@@ -9,8 +9,8 @@ module.exports = function(grunt) {
     sass: {
       dist: {
         files: {
-          'public/css/stylesheet.css': 'public/sass/stylesheet.scss',
-          'public/css/font-awesome.css': 'public/sass/font-awesome.scss'
+          'public/css/stylesheet.css': 'public/sass/form/form.scss',
+          'public/css/font-awesome.css': 'public/sass/font-awesome/font-awesome.scss'
         }
       }
     },
@@ -22,7 +22,7 @@ module.exports = function(grunt) {
       },
 
       stylesheets: {
-        files: ['public/sass/*.scss'],
+        files: ['public/sass/**/*.scss'],
         tasks: ['sass']
       }
     }

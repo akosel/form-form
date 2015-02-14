@@ -30,6 +30,20 @@ html
               fn_dbFormat: function() {
                 return this.value;
               }
+            },
+            {
+              placeholder: 'Where do you want to go?',
+              type: 'text',
+              name: 'location',
+              required: true,
+              places: true,
+              autofocus: true,
+              fn_print: function() {
+                return this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
             }
           ]
         }, {
