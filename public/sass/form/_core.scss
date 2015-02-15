@@ -37,7 +37,7 @@ main {
 }
 
 input {
-  padding: 1em;
+  padding: 1em 0.25em;
   font-size: 36px;
   font-family: $font-stack;
   display: block;
@@ -64,6 +64,7 @@ button {
 
   &:disabled {
     background-color: #CCC;
+    opacity: 0.7;
     &:hover {
       background-color: #CCC;
       cursor: default;

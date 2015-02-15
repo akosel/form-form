@@ -82,7 +82,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
   buildSelect: function($target, selectObj) {
     var attributes = Object.keys(selectObj.attributes);
+
     selectObj.$select = document.createElement('select'); 
+    selectObj.$select.className = 'custom-dropdown__select custom-dropdown__select--white';
+
+    // to override browser dropdown style
+    var $span = document.createElement('span');
+    $span.className = 'custom-dropdown custom-dropdown--white';
+    $span.appendChild(selectObj.$select);
 
     for (var i = 0; i < attributes.length; i += 1) {
       selectObj.$select[attributes[i]] = selectObj.attributes[attributes[i]];
@@ -98,7 +105,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       selectObj.$select.appendChild($newOpt);
     }
 
-    $target.appendChild(selectObj.$select);
+    $target.appendChild($span);
   },
 
   buildData: function($target) {
