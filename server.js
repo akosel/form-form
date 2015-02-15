@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 var mongoose = require('mongoose');
 var Vacation = require('./models/Vacation.js');
+var User = require('./models/User.js');
 
 var db = mongoose.connection;
 
@@ -37,6 +38,14 @@ app.route('/vacations')
   .post(function(req, res) {
     console.log('body', JSON.stringify(req.body));
     var v = Vacation.create(req.body, function(err, v) {
+      console.log(err, v); 
+    });
+  });
+
+app.route('/users')
+  .post(function(req, res) {
+    console.log('body', JSON.stringify(req.body));
+    var v = User.create(req.body, function(err, v) {
       console.log(err, v); 
     });
   });
