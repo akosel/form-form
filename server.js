@@ -37,9 +37,29 @@ app.route('/vacations')
   })
   .post(function(req, res) {
     console.log('body', JSON.stringify(req.body));
-    var v = Vacation.create(req.body, function(err, v) {
-      console.log(err, v); 
+
+    var user = new User({
+      email: req.body.email
     });
+    User.findOne({ email: user.email }, function(err, existingUser) { 
+      if (existingUser) {
+        req.body.createdBy = existingUser.id;
+        delete req.body.email;
+        var v = Vacation.create(req.body, function(err, v) {
+          console.log('created: ', v);
+        });
+      } else {
+        user.save(function(err, user) {
+          if (err) return next(err);
+          req.body.createdBy = user.id;
+          delete req.body.email;
+          var v = Vacation.create(req.body, function(err, v) {
+            console.log('created: ', v);
+          });
+        });
+      }
+    });
+
   });
 
 app.route('/users')
