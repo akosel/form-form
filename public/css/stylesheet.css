@@ -225,18 +225,20 @@ body {
   top: 50%;
   line-height: 0;
   color: white;
-  font-size: 10em;
-  opacity: 0; }
+  opacity: 0;
+  font-size: 72px;
+  font-size: 4.5vw; }
   .arrow.right {
     right: 10px; }
 
 main article.box {
-  font-size: 36px;
   line-height: 2em;
   margin: 0 auto;
   overflow: visible;
   width: 1024px;
-  color: white; }
+  color: white;
+  font-size: 36px;
+  font-size: 2.25vw; }
   @media only screen and (max-width: 720px) {
     main article.box {
       width: 300px; } }
@@ -246,17 +248,17 @@ main article.box {
 
 input {
   padding: 1em 0.25em;
-  font-size: 36px;
   font-family: "Gill Sans", Montserrat, Helvetica;
   display: block;
   width: 100%;
-  border: none; }
+  border: none;
+  font-size: 36px;
+  font-size: 2.25vw; }
   input:not(:first-child) {
     margin-top: 10px; }
 
 button {
   padding: 1em;
-  font-size: 36px;
   font-family: "Gill Sans", Montserrat, Helvetica;
   display: block;
   width: 100%;
@@ -265,6 +267,8 @@ button {
   color: white;
   margin-top: 1em;
   background-color: #27AE60;
+  font-size: 36px;
+  font-size: 2.25vw;
   -webkit-transition: background-color 0.3s ease;
   -moz-transition: background-color 0.3s ease;
   -ms-transition: background-color 0.3s ease;

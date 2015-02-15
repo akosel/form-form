@@ -31,3 +31,13 @@
   -o-transition: $args;
   transition: $args;
 }
+
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return $remSize * 1vw;
+}
+
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: calculateRem($size);
+}
