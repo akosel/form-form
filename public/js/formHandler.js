@@ -62,7 +62,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     function handleTouchStart(evt) {                                         
       xDown = evt.touches[0].clientX;                                      
       yDown = evt.touches[0].clientY;                                      
-    };                                                
+    }                                                
 
     function handleTouchMove(evt) {
       if ( ! xDown || ! yDown ) {
@@ -93,7 +93,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       /* reset values */
       xDown = null;
       yDown = null;                                             
-    };
+    }
 
     this.buildBox(self.options.activeStep);
   },
@@ -312,8 +312,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       this.sendNotification('You may go no further.');
       return;
     } else if (this.options.activeStep === this.options.steps.length - 2) {
-      this.post('/vacations', JSON.stringify(this.getPostData('vacation')));
-    }else if (this.options.processing) {
+    } else if (this.options.processing) {
       return;
     } else if (this.options.$activeForm && !this.options.$activeForm.checkValidity()) {
       this.sendNotification('Whoops, looks like you still need to fill in a field!');
@@ -366,11 +365,18 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   },
 
   // post some json to a given url. this really doesn't belong in the form handler XXX 
-  post: function(url, json) {
+  post: function(url, json, callback) {
     var xhr = new XMLHttpRequest();
     xhr.open('POST', url);
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
-    xhr.send(json);
+    xhr.onreadystatechange = function() {
+      if (xhr.status === 200 && xhr.readyState === 4) {
+        if (callback) {
+          callback();
+        }
+      }
+    };
+    xhr.send(JSON.stringify(json));
   }
 
 });
