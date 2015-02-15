@@ -1,6 +1,8 @@
 body {
   font-family: $font-stack;
   background-color: $red;
+  margin: 0;
+  padding: 0;
 }
 
 .arrow {
@@ -23,12 +25,21 @@ main {
     overflow: visible;
     width: 1024px;
     color: white;
+    padding-top: 0.5vh;
     @include font-size(36px);
     @media #{$media-phone} {
       width: 300px;
     }
   }
 
+}
+
+.progress-bar {
+  position: fixed;
+  height: 1.5vh;
+  background-color: white;
+  width: 0;
+  @include transition(width .5s ease);
 }
 
 .clearfix {

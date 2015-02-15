@@ -16,9 +16,10 @@ window.FormHandler = function(args) {
 FormHandler.prototype = extend(FormHandler.prototype, {
   init: function() {
     var self = this;
-    this.options.$main = document.createElement('main');
+    this.options.$main      = document.createElement('main');
     this.options.$container = document.createElement('section');
-    this.options.$body = document.querySelector('body');
+    this.options.$body      = document.querySelector('body');
+    this.options.$bar       = document.querySelector('.progress-bar');
     this.options.$main.appendChild(this.options.$container);
     this.options.$body.appendChild(this.options.$main);
 
@@ -96,6 +97,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     }
 
     this.buildBox(self.options.activeStep);
+  },
+
+  // set up a progress bar
+  updateProgressBar: function() {
+    var denom = this.options.steps.length - 1,
+        num   = this.options.activeStep;
+
+    this.options.$bar.style.width = (num / denom) * 100 + '%';
   },
 
   buildInput: function($target, inputObj) {
@@ -193,6 +202,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       }
       this.options.$activeNotificationsPanel = step.$notificationsPanel;
       this.options.$body.style.backgroundColor = step.bgColor || '#F60';
+      this.updateProgressBar();
   },
 
   // builds a box, or changes to a previously created box, if it exists 
@@ -218,15 +228,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     step.$title.textContent = step.title;
     step.$box.appendChild(step.$title);
 
-    // set up the description text 
-    step.$description = document.createElement('p');
-    step.$description.textContent = step.description;
-    step.$box.appendChild(step.$description);
-
-    // set up notifications panel
-    step.$notificationsPanel = document.createElement('div');
-    step.$notificationsPanel.className = 'notifications';
-    step.$box.appendChild(step.$notificationsPanel);
+    if (step.description) {
+      // set up the description text 
+      step.$description = document.createElement('p');
+      step.$description.textContent = step.description;
+      step.$box.appendChild(step.$description);
+    }
 
     // build the form, if any inputs are configured 
     if (step.formElements) {
@@ -276,6 +283,11 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       step.$formSubmit.textContent = 'PLEASE FILL IN THE FORM';
       step.$formSubmit.disabled = true;
     }
+
+    // set up notifications panel
+    step.$notificationsPanel = document.createElement('div');
+    step.$notificationsPanel.className = 'notifications';
+    step.$box.appendChild(step.$notificationsPanel);
 
     // add listener for animations on the notifications panel
     PrefixedEvent(step.$notificationsPanel, 'AnimationEnd', function(e) {

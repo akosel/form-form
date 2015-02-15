@@ -218,7 +218,9 @@
     opacity: 0; } }
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
-  background-color: #F60; }
+  background-color: #F60;
+  margin: 0;
+  padding: 0; }
 
 .arrow {
   position: fixed;
@@ -237,11 +239,23 @@ main article.box {
   overflow: visible;
   width: 1024px;
   color: white;
+  padding-top: 0.5vh;
   font-size: 36px;
   font-size: 2.25vw; }
   @media only screen and (max-width: 720px) {
     main article.box {
       width: 300px; } }
+
+.progress-bar {
+  position: fixed;
+  height: 1.5vh;
+  background-color: white;
+  width: 0;
+  -webkit-transition: width 0.5s ease;
+  -moz-transition: width 0.5s ease;
+  -ms-transition: width 0.5s ease;
+  -o-transition: width 0.5s ease;
+  transition: width 0.5s ease; }
 
 .clearfix {
   overflow: auto; }
