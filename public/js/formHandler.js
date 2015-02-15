@@ -332,7 +332,6 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 var pfx = ["webkit", "moz", "MS", "o", ""];
 function PrefixedEvent(element, type, callback, useCapture) {
   useCapture = useCapture || false;
-  console.log(element, useCapture);
   for (var p = 0; p < pfx.length; p++) {
     if (!pfx[p]) type = type.toLowerCase();
     element.addEventListener(pfx[p]+type, callback, useCapture);

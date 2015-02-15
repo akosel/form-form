@@ -41,239 +41,184 @@
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-moz-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-ms-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-o-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-webkit-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-moz-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-ms-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-o-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-webkit-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-moz-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-ms-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-o-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-webkit-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-moz-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-ms-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-o-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-webkit-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-moz-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-ms-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-o-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
-  background-color: #ff6600; }
+  background-color: #F60; }
 
 .arrow {
   position: fixed;
@@ -319,7 +264,7 @@ button {
   cursor: pointer;
   color: white;
   margin-top: 1em;
-  background-color: #27ae60;
+  background-color: #27AE60;
   -webkit-transition: background-color 0.3s ease;
   -moz-transition: background-color 0.3s ease;
   -ms-transition: background-color 0.3s ease;
@@ -332,3 +277,5 @@ button {
       cursor: default; }
   button:hover {
     background-color: #36d278; }
+
+/*# sourceMappingURL=stylesheet.css.map */
