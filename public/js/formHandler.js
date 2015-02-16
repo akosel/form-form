@@ -272,6 +272,9 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       // allow normal submitting, but block if form is invalid
       step.$form.onsubmit = function(e) {
         e.preventDefault();
+        if (self.submitted) {
+          return;
+        }
         if (step.$form.querySelector('input').validity) {
           return self.next();
         }
