@@ -251,6 +251,11 @@ FormHandler.prototype = extend(FormHandler.prototype, {
         if (step.keyTimeout) {
           clearInterval(step.keyTimeout);
         }
+
+        // kind of a catch all to avoid double submissions or other weird stuff
+        if (self.submitted) {
+          return;
+        }
         
         // if valid, wait 500ms, then enable and change text. otherwise, disable.
         if(step.$form.checkValidity()) {
