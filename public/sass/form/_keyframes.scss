@@ -21,6 +21,26 @@
   @include animation('slideOutPrevious .25s');
 }
 
+.plane {
+  position: absolute;
+  top: 50%;
+  color: white;
+  left: -10%;
+  @include font-size(60px);
+  @include animation('flyOver 20s infinite');
+  transform: rotate(45deg);
+}
+
+.truck {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  left: -10%;
+  @include font-size(60px);
+  @include animation('driveBy 20s infinite');
+  transform: scaleX(-1);
+}
+
 @include keyframes(slideInNext) {
   from {
     margin-left: 100%;
@@ -75,5 +95,26 @@
   }
   100% {
     opacity: 0
+  }
+}
+
+@include keyframes(flyOver) {
+  0% {
+    left: -10%;
+  }
+  100% {
+    left: 110%;
+  }
+}
+
+@include keyframes(driveBy) {
+  0% {
+    left: -10%;
+  }
+  50% {
+    left: 50%;
+  }
+  100% {
+    left: 110%;
   }
 }

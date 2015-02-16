@@ -36,6 +36,34 @@
   -o-animation: slideOutPrevious .25s;
   animation: slideOutPrevious .25s; }
 
+.plane {
+  position: absolute;
+  top: 50%;
+  color: white;
+  left: -10%;
+  font-size: 60px;
+  font-size: 5.625vw;
+  -webkit-animation: flyOver 20s infinite;
+  -moz-animation: flyOver 20s infinite;
+  -ms-animation: flyOver 20s infinite;
+  -o-animation: flyOver 20s infinite;
+  animation: flyOver 20s infinite;
+  transform: rotate(45deg); }
+
+.truck {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  left: -10%;
+  font-size: 60px;
+  font-size: 5.625vw;
+  -webkit-animation: driveBy 20s infinite;
+  -moz-animation: driveBy 20s infinite;
+  -ms-animation: driveBy 20s infinite;
+  -o-animation: driveBy 20s infinite;
+  animation: driveBy 20s infinite;
+  transform: scaleX(-1); }
+
 @-webkit-keyframes slideInNext {
   from {
     margin-left: 100%;
@@ -216,6 +244,66 @@
     opacity: 1; }
   100% {
     opacity: 0; } }
+@-webkit-keyframes flyOver {
+  0% {
+    left: -10%; }
+  100% {
+    left: 110%; } }
+@-moz-keyframes flyOver {
+  0% {
+    left: -10%; }
+  100% {
+    left: 110%; } }
+@-ms-keyframes flyOver {
+  0% {
+    left: -10%; }
+  100% {
+    left: 110%; } }
+@-o-keyframes flyOver {
+  0% {
+    left: -10%; }
+  100% {
+    left: 110%; } }
+@keyframes flyOver {
+  0% {
+    left: -10%; }
+  100% {
+    left: 110%; } }
+@-webkit-keyframes driveBy {
+  0% {
+    left: -10%; }
+  50% {
+    left: 50%; }
+  100% {
+    left: 110%; } }
+@-moz-keyframes driveBy {
+  0% {
+    left: -10%; }
+  50% {
+    left: 50%; }
+  100% {
+    left: 110%; } }
+@-ms-keyframes driveBy {
+  0% {
+    left: -10%; }
+  50% {
+    left: 50%; }
+  100% {
+    left: 110%; } }
+@-o-keyframes driveBy {
+  0% {
+    left: -10%; }
+  50% {
+    left: 50%; }
+  100% {
+    left: 110%; } }
+@keyframes driveBy {
+  0% {
+    left: -10%; }
+  50% {
+    left: 50%; }
+  100% {
+    left: 110%; } }
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
   background-color: #2980b9;
