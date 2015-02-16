@@ -1,6 +1,6 @@
 body {
   font-family: $font-stack;
-  background-color: $red;
+  background-color: $blue;
   margin: 0;
   padding: 0;
 }
@@ -23,12 +23,21 @@ main {
     line-height: 2em;
     margin: 0 auto;
     overflow: visible;
-    width: 1024px;
+    width: 960px;
     color: white;
     padding-top: 0.5vh;
-    @include font-size(36px);
-    @media #{$media-phone} {
-      width: 300px;
+    @include font-size(24px);
+    @include bp-large {
+      width: 80%; 
+      @include font-size(36px);
+    }
+    @include bp-medium {
+      width: 90%; 
+      @include font-size(48px);
+    }
+    @include bp-small {
+      width: 95%; 
+      @include font-size(60px);
     }
   }
 
@@ -52,7 +61,16 @@ input {
   display: block;
   width: 100%;
   border: none;
-  @include font-size(36px);
+  @include font-size(24px);
+  @include bp-large {
+    @include font-size(36px);
+  }
+  @include bp-medium {
+    @include font-size(48px);
+  }
+  @include bp-small {
+    @include font-size(60px);
+  }
   &:not(:first-child) {
     margin-top: 10px;
   }
@@ -68,7 +86,16 @@ button {
   color: white;
   margin-top: 1em;
   background-color: $green;
-  @include font-size(36px);
+  @include font-size(24px);
+  @include bp-large {
+    @include font-size(36px);
+  }
+  @include bp-medium {
+    @include font-size(48px);
+  }
+  @include bp-small {
+    @include font-size(60px);
+  }
   @include transition(background-color .3s ease);
 
 

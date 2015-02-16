@@ -218,7 +218,7 @@
     opacity: 0; } }
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
-  background-color: #F60;
+  background-color: #2980b9;
   margin: 0;
   padding: 0; }
 
@@ -229,7 +229,7 @@ body {
   color: white;
   opacity: 0;
   font-size: 72px;
-  font-size: 4.5vw; }
+  font-size: 6.75vw; }
   .arrow.right {
     right: 10px; }
 
@@ -237,14 +237,26 @@ main article.box {
   line-height: 2em;
   margin: 0 auto;
   overflow: visible;
-  width: 1024px;
+  width: 960px;
   color: white;
   padding-top: 0.5vh;
-  font-size: 36px;
+  font-size: 24px;
   font-size: 2.25vw; }
-  @media only screen and (max-width: 720px) {
+  @media only screen and (max-width: 60em) {
     main article.box {
-      width: 300px; } }
+      width: 80%;
+      font-size: 36px;
+      font-size: 3.375vw; } }
+  @media only screen and (max-width: 40em) {
+    main article.box {
+      width: 90%;
+      font-size: 48px;
+      font-size: 4.5vw; } }
+  @media only screen and (max-width: 30em) {
+    main article.box {
+      width: 95%;
+      font-size: 60px;
+      font-size: 5.625vw; } }
 
 .progress-bar {
   position: fixed;
@@ -266,8 +278,20 @@ input {
   display: block;
   width: 100%;
   border: none;
-  font-size: 36px;
+  font-size: 24px;
   font-size: 2.25vw; }
+  @media only screen and (max-width: 60em) {
+    input {
+      font-size: 36px;
+      font-size: 3.375vw; } }
+  @media only screen and (max-width: 40em) {
+    input {
+      font-size: 48px;
+      font-size: 4.5vw; } }
+  @media only screen and (max-width: 30em) {
+    input {
+      font-size: 60px;
+      font-size: 5.625vw; } }
   input:not(:first-child) {
     margin-top: 10px; }
 
@@ -281,13 +305,25 @@ button {
   color: white;
   margin-top: 1em;
   background-color: #27AE60;
-  font-size: 36px;
+  font-size: 24px;
   font-size: 2.25vw;
   -webkit-transition: background-color 0.3s ease;
   -moz-transition: background-color 0.3s ease;
   -ms-transition: background-color 0.3s ease;
   -o-transition: background-color 0.3s ease;
   transition: background-color 0.3s ease; }
+  @media only screen and (max-width: 60em) {
+    button {
+      font-size: 36px;
+      font-size: 3.375vw; } }
+  @media only screen and (max-width: 40em) {
+    button {
+      font-size: 48px;
+      font-size: 4.5vw; } }
+  @media only screen and (max-width: 30em) {
+    button {
+      font-size: 60px;
+      font-size: 5.625vw; } }
   button:disabled {
     background-color: #CCC;
     opacity: 0.7; }

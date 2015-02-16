@@ -23,9 +23,16 @@ app.use(bodyParser.json());
 // server starts, running the harvester. 
 server.listen(process.env.PORT || 8000); 
 
-// only page for application renders are map template
 app.get('/', function(req, res) {
   res.render('home');
+});
+
+app.get('/form', function(req, res) {
+  res.render('form-form');
+});
+
+app.get('/complete', function(req, res) {
+  res.render('complete');
 });
 
 app.route('/vacations')
@@ -46,7 +53,8 @@ app.route('/vacations')
         req.body.createdBy = existingUser.id;
         delete req.body.email;
         var v = Vacation.create(req.body, function(err, v) {
-          console.log('created: ', v);
+          console.log('created u: ', v);
+          res.send({ redirect: '/complete' });
         });
       } else {
         user.save(function(err, user) {
@@ -54,7 +62,8 @@ app.route('/vacations')
           req.body.createdBy = user.id;
           delete req.body.email;
           var v = Vacation.create(req.body, function(err, v) {
-            console.log('created: ', v);
+            console.log('created v and u: ', v);
+            res.send({ redirect: '/complete' });
           });
         });
       }

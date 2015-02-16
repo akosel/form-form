@@ -101,8 +101,8 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
   // set up a progress bar
   updateProgressBar: function() {
-    var denom = this.options.steps.length - 1,
-        num   = this.options.activeStep;
+    var denom = this.options.steps.length,
+        num   = this.options.activeStep + 1;
 
     this.options.$bar.style.width = (num / denom) * 100 + '%';
   },
@@ -162,13 +162,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   buildData: function($target) {
     $target = $target || this.options.$activeNotificationsPanel;
     var formData = this.getFormData();
-    var dataObjKeys = Object.keys(this.getFormData()).reverse();
+    formData.reverse();
     $target.innerHTML = null;
 
-    while (dataObjKeys.length) {
+    while (formData.length) {
       var $data = document.createElement('p');
-      var key = dataObjKeys.pop();
-      $data.textContent = [key, formData[key]].join(' ');
+      $data.textContent = formData.pop();
       $target.appendChild($data);
     }
   },
@@ -201,7 +200,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
         this.buildData(step.$notificationsPanel);
       }
       this.options.$activeNotificationsPanel = step.$notificationsPanel;
-      this.options.$body.style.backgroundColor = step.bgColor || '#F60';
+      this.options.$body.style.backgroundColor = step.bgColor;
       this.updateProgressBar();
   },
 
@@ -251,7 +250,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
         // if valid, wait 500ms, then enable and change text. otherwise, disable.
         if(step.$form.checkValidity()) {
           step.keyTimeout = setTimeout(function() {
-            step.$formSubmit.textContent = 'NEXT';
+            step.$formSubmit.textContent = step.validButtonText;
             step.$formSubmit.disabled = false;
           }, 250);
         } else {
@@ -319,15 +318,14 @@ FormHandler.prototype = extend(FormHandler.prototype, {
   },
 
   // move to the next step
-  next: function(){
-    if (this.options.activeStep === this.options.steps.length - 1) {
-      this.sendNotification('You may go no further.');
+  next: function() {
+    if (this.options.$activeForm && !this.options.$activeForm.checkValidity()) {
+      this.sendNotification('Whoops, looks like you still need to fill in a field!');
       return;
-    } else if (this.options.activeStep === this.options.steps.length - 2) {
     } else if (this.options.processing) {
       return;
-    } else if (this.options.$activeForm && !this.options.$activeForm.checkValidity()) {
-      this.sendNotification('Whoops, looks like you still need to fill in a field!');
+    } else if (this.options.activeStep === this.options.steps.length - 1) {
+      this.post('/vacations', this.getPostData('vacation'), function(xhr) { var data = JSON.parse(xhr.responseText); window.location = data.redirect; });
       return;
     }
     this.options.activeStep += 1; 
@@ -348,12 +346,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
   // set up an object for easy printing of all the data
   getFormData: function() {
-    var formData = {};
+    var formData = [];
     this.options.steps.forEach(function(step) {
       if (step.formElements && step.formElements.length) {
         step.formElements.forEach(function(input) {
-          if (input.value && input.attributes.placeholder) {
-            formData[input.attributes.placeholder] = input.fn_print();
+          if (input.fn_print) {
+            formData.push(input.fn_print());
           }
         });
       }
@@ -383,8 +381,9 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
     xhr.onreadystatechange = function() {
       if (xhr.status === 200 && xhr.readyState === 4) {
+        console.log('xhr: ', xhr);
         if (callback) {
-          callback();
+          callback(xhr);
         }
       }
     };

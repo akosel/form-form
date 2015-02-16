@@ -1,0 +1,141 @@
+extends template
+
+block content
+    div.progress-bar
+    div.left.arrow
+      i.fa.fa-arrow-left.fa-1
+    div.right.arrow
+      i.fa.fa-arrow-right.fa-1
+
+  block scripts
+  script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?libraries=places")
+  script(src='/js/formHandler.js')
+  script.
+    var app = [{
+          title: 'Location. Location. Location.',
+          description: 'Where do you want to go?',
+          bgColor: '#e67e22',
+          validButtonText: 'NEXT: COSTS',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'e.g. Timbuktu or Thailand',
+                type: 'text',
+                name: 'location',
+                required: true,
+                places: true,
+                autofocus: true
+              },
+              fn_print: function() {
+                return 'Location: ' + this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+        }, {
+          title: 'Dolla Dolla Bill Y\'all',
+          description: 'What is your ballpark budget (USD)?',
+          bgColor: '#462255',
+          validButtonText: 'NEXT: TIMING',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'e.g. 1000 or 200 or 492',
+                name: 'cost',
+                required: true,
+                min: 1,
+                type: 'number',
+                autofocus: true
+              },
+              fn_print: function() {
+                return 'Costs: $' + this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+        }, {
+          title: 'Timing is everything',
+          description: 'Roughly speaking, when do you want to go and for how long?',
+          bgColor: '#1C6B7C',
+          validButtonText: 'NEXT: REVIEW',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                type: 'date',
+                required: true,
+                name: 'date',
+                autofocus: true,
+              },
+              fn_print: function() {
+                var date = new Date(this.value);
+                return 'Around: ' + date.toLocaleDateString();
+              },
+              fn_dbFormat: function() {
+                var date = new Date(this.value);
+                return date;
+              }
+            },
+            {
+              tagName: 'select',
+              modelName: 'vacation',
+              value: 'A week',
+              attributes: {
+                name: 'duration'
+              },
+              options: [
+                'A week',
+                'Two Weeks',
+                'Three Weeks',
+                'A month',
+                'A long, long time'
+              ],
+              fn_print: function() {
+                return 'Duration: ' + this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+        }, {
+          title: 'This is it.',
+          description: 'Ok, after you review everything, enter your email below.',
+          validButtonText: 'ALL DONE',
+          showData: true,
+          bgColor: '#125E3B',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'What is your email?',
+                name: 'email',
+                required: true,
+                type: 'email',
+                autofocus: true
+              },
+              fn_print: function() {
+                return this.value;
+              },
+              fn_dbFormat: function() {
+                return this.value;
+              }
+            }
+          ]
+    }];
+
+
+    var form = new FormHandler({
+      activeStep: 0,
+      steps: app
+    });
