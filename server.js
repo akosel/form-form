@@ -7,13 +7,14 @@ var mongoose = require('mongoose');
 var Vacation = require('./models/Vacation.js');
 var User = require('./models/User.js');
 
+var mongoUrl = process.env.MONGOLAB_URI || 'mongodb://localhost/test';
+mongoose.connect(mongoUrl);
 var db = mongoose.connection;
 
 db.on('error', console.error);
 db.once('open', function() {
   console.log('connected');
 });
-mongoose.connect('mongodb://localhost/test');
 
 app.set('views', './views');
 app.set('view engine', 'jade');
