@@ -47,6 +47,11 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     window.addEventListener('keyup', function(e) {
       e.stopPropagation();
 
+      // kind of a catch all to avoid double submissions or other weird stuff
+      if (self.submitted) {
+        return;
+      }
+
       if (e.keyCode === 37) {
         self.previous();
       } else if (e.keyCode === 39) {
@@ -325,6 +330,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     } else if (this.options.processing) {
       return;
     } else if (this.options.activeStep === this.options.steps.length - 1) {
+      this.submitted = true;
       this.post('/vacations', this.getPostData('vacation'), function(xhr) { var data = JSON.parse(xhr.responseText); window.location = data.redirect; });
       return;
     }
