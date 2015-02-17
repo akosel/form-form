@@ -23,22 +23,57 @@
 
 .plane {
   position: absolute;
-  top: 50%;
   color: white;
-  left: -10%;
   @include font-size(60px);
-  @include animation('flyOver 20s infinite');
-  transform: rotate(45deg);
+  @include animation('flyAway 5s infinite linear');
 }
 
-.truck {
+.building-1 {
   position: absolute;
   bottom: 0;
   color: white;
-  left: -10%;
-  @include font-size(60px);
-  @include animation('driveBy 20s infinite');
-  transform: scaleX(-1);
+  left: 30%;
+  @include font-size(120px);
+}
+
+.building-2 {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  left: 60%;
+  @include font-size(200px);
+}
+
+.building-3 {
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  color: white;
+  @include font-size(160px);
+}
+
+.building-4 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  color: white;
+  @include font-size(210px);
+}
+
+.building-5 {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  color: white;
+  @include font-size(100px);
+}
+
+.building-6 {
+  position: absolute;
+  bottom: 0;
+  left: 22%;
+  color: white;
+  @include font-size(200px);
 }
 
 @include keyframes(slideInNext) {
@@ -98,23 +133,15 @@
   }
 }
 
-@include keyframes(flyOver) {
+@include keyframes(flyAway) {
   0% {
-    left: -10%;
+    left: 0%;
+    top: 50%;
+    transform: scaleY(.5) rotate(45deg);
   }
   100% {
-    left: 110%;
-  }
-}
-
-@include keyframes(driveBy) {
-  0% {
-    left: -10%;
-  }
-  50% {
-    left: 50%;
-  }
-  100% {
-    left: 110%;
+    left: 100%;
+    top: 50%;
+    transform: scaleY(.5) rotate(45deg);
   }
 }

@@ -38,272 +38,353 @@
 
 .plane {
   position: absolute;
-  top: 50%;
   color: white;
-  left: -10%;
   font-size: 60px;
   font-size: 5.625vw;
-  -webkit-animation: flyOver 20s infinite;
-  -moz-animation: flyOver 20s infinite;
-  -ms-animation: flyOver 20s infinite;
-  -o-animation: flyOver 20s infinite;
-  animation: flyOver 20s infinite;
-  transform: rotate(45deg); }
+  -webkit-animation: flyAway 5s infinite linear;
+  -moz-animation: flyAway 5s infinite linear;
+  -ms-animation: flyAway 5s infinite linear;
+  -o-animation: flyAway 5s infinite linear;
+  animation: flyAway 5s infinite linear; }
 
-.truck {
+.building-1 {
   position: absolute;
   bottom: 0;
   color: white;
-  left: -10%;
-  font-size: 60px;
-  font-size: 5.625vw;
-  -webkit-animation: driveBy 20s infinite;
-  -moz-animation: driveBy 20s infinite;
-  -ms-animation: driveBy 20s infinite;
-  -o-animation: driveBy 20s infinite;
-  animation: driveBy 20s infinite;
-  transform: scaleX(-1); }
+  left: 30%;
+  font-size: 120px;
+  font-size: 11.25vw; }
+
+.building-2 {
+  position: absolute;
+  bottom: 0;
+  color: white;
+  left: 60%;
+  font-size: 200px;
+  font-size: 18.75vw; }
+
+.building-3 {
+  position: absolute;
+  bottom: 0;
+  left: 40%;
+  color: white;
+  font-size: 160px;
+  font-size: 15vw; }
+
+.building-4 {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  color: white;
+  font-size: 210px;
+  font-size: 19.6875vw; }
+
+.building-5 {
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  color: white;
+  font-size: 100px;
+  font-size: 9.375vw; }
+
+.building-6 {
+  position: absolute;
+  bottom: 0;
+  left: 22%;
+  color: white;
+  font-size: 200px;
+  font-size: 18.75vw; }
 
 @-webkit-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
+
 @-moz-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
+
 @-ms-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
+
 @-o-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
+
 @keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
+
 @-webkit-keyframes slideOutNext {
   from {
     margin-left: 0%; }
+
   to {
     margin-left: -200%;
     opacity: 0; } }
+
 @-moz-keyframes slideOutNext {
   from {
     margin-left: 0%; }
+
   to {
     margin-left: -200%;
     opacity: 0; } }
+
 @-ms-keyframes slideOutNext {
   from {
     margin-left: 0%; }
+
   to {
     margin-left: -200%;
     opacity: 0; } }
+
 @-o-keyframes slideOutNext {
   from {
     margin-left: 0%; }
+
   to {
     margin-left: -200%;
     opacity: 0; } }
+
 @keyframes slideOutNext {
   from {
     margin-left: 0%; }
+
   to {
     margin-left: -200%;
     opacity: 0; } }
+
 @-webkit-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     opacity: 1; } }
+
 @-moz-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     opacity: 1; } }
+
 @-ms-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     opacity: 1; } }
+
 @-o-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     opacity: 1; } }
+
 @keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
+
   to {
     margin-left: 0%;
     opacity: 1; } }
+
 @-webkit-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
+
   to {
     margin-left: 100%;
     opacity: 0; } }
+
 @-moz-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
+
   to {
     margin-left: 100%;
     opacity: 0; } }
+
 @-ms-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
+
   to {
     margin-left: 100%;
     opacity: 0; } }
+
 @-o-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
+
   to {
     margin-left: 100%;
     opacity: 0; } }
+
 @keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
+
   to {
     margin-left: 100%;
     opacity: 0; } }
+
 @-webkit-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
+
   10% {
     opacity: 1; }
+
   100% {
     opacity: 0; } }
+
 @-moz-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
+
   10% {
     opacity: 1; }
+
   100% {
     opacity: 0; } }
+
 @-ms-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
+
   10% {
     opacity: 1; }
+
   100% {
     opacity: 0; } }
+
 @-o-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
+
   10% {
     opacity: 1; }
+
   100% {
     opacity: 0; } }
+
 @keyframes fadeInAndOut {
   0% {
     opacity: 0; }
+
   10% {
     opacity: 1; }
+
   100% {
     opacity: 0; } }
-@-webkit-keyframes flyOver {
+
+@-webkit-keyframes flyAway {
   0% {
-    left: -10%; }
+    left: 0%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); }
+
   100% {
-    left: 110%; } }
-@-moz-keyframes flyOver {
+    left: 100%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); } }
+
+@-moz-keyframes flyAway {
   0% {
-    left: -10%; }
+    left: 0%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); }
+
   100% {
-    left: 110%; } }
-@-ms-keyframes flyOver {
+    left: 100%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); } }
+
+@-ms-keyframes flyAway {
   0% {
-    left: -10%; }
+    left: 0%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); }
+
   100% {
-    left: 110%; } }
-@-o-keyframes flyOver {
+    left: 100%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); } }
+
+@-o-keyframes flyAway {
   0% {
-    left: -10%; }
+    left: 0%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); }
+
   100% {
-    left: 110%; } }
-@keyframes flyOver {
+    left: 100%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); } }
+
+@keyframes flyAway {
   0% {
-    left: -10%; }
+    left: 0%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); }
+
   100% {
-    left: 110%; } }
-@-webkit-keyframes driveBy {
-  0% {
-    left: -10%; }
-  50% {
-    left: 50%; }
-  100% {
-    left: 110%; } }
-@-moz-keyframes driveBy {
-  0% {
-    left: -10%; }
-  50% {
-    left: 50%; }
-  100% {
-    left: 110%; } }
-@-ms-keyframes driveBy {
-  0% {
-    left: -10%; }
-  50% {
-    left: 50%; }
-  100% {
-    left: 110%; } }
-@-o-keyframes driveBy {
-  0% {
-    left: -10%; }
-  50% {
-    left: 50%; }
-  100% {
-    left: 110%; } }
-@keyframes driveBy {
-  0% {
-    left: -10%; }
-  50% {
-    left: 50%; }
-  100% {
-    left: 110%; } }
+    left: 100%;
+    top: 50%;
+    transform: scaleY(0.5) rotate(45deg); } }
+
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
   background-color: #2980b9;
@@ -392,7 +473,7 @@ button {
   cursor: pointer;
   color: white;
   margin-top: 1em;
-  background-color: #27AE60;
+  background-color: #27ae60;
   font-size: 24px;
   font-size: 2.25vw;
   -webkit-transition: background-color 0.3s ease;
@@ -506,5 +587,3 @@ button {
 
     .custom-dropdown--small .custom-dropdown__select {
       padding-right: 0.5em; } } }
-
-/*# sourceMappingURL=stylesheet.css.map */
