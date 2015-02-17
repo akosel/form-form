@@ -136,12 +136,12 @@
 @include keyframes(flyAway) {
   0% {
     left: 0%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(.5) rotate(45deg);
   }
   100% {
     left: 100%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(.5) rotate(45deg);
   }
 }

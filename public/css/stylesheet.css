@@ -333,56 +333,56 @@
 @-webkit-keyframes flyAway {
   0% {
     left: 0%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
 
   100% {
     left: 100%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
 
 @-moz-keyframes flyAway {
   0% {
     left: 0%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
 
   100% {
     left: 100%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
 
 @-ms-keyframes flyAway {
   0% {
     left: 0%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
 
   100% {
     left: 100%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
 
 @-o-keyframes flyAway {
   0% {
     left: 0%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
 
   100% {
     left: 100%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
 
 @keyframes flyAway {
   0% {
     left: 0%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
 
   100% {
     left: 100%;
-    top: 50%;
+    top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
 
 body {
