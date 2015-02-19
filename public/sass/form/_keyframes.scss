@@ -142,11 +142,11 @@
   0% {
     left: -10%;
     top: 50vh;
-    transform: scaleY(.5) rotate(45deg);
+    @include transform(scaleY(.5) rotate(45deg));
   }
   100% {
     left: 100%;
     top: 50vh;
-    transform: scaleY(.5) rotate(45deg);
+    @include transform(scaleY(.5) rotate(45deg));
   }
 }
