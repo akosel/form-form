@@ -21,6 +21,11 @@
   @include animation('slideOutPrevious .25s');
 }
 
+.planeContainer {
+  position: relative;
+  height: 100px;
+}
+
 .plane {
   position: absolute;
   color: white;
@@ -135,7 +140,7 @@
 
 @include keyframes(flyAway) {
   0% {
-    left: 0%;
+    left: -10%;
     top: 50vh;
     transform: scaleY(.5) rotate(45deg);
   }

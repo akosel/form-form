@@ -5,9 +5,14 @@ html
     link(rel='stylesheet', href='/css/stylesheet.css')
     block head
   body
-    //nav
-    //  ul
-    //    li HOME 
-    //    li FAQ
+    nav
+      section.nav-content
+        div.logo-wrapper
+          img(src='/images/logo_darkbg.svg')
+
+        div.sub-nav
+          a(href='/') HOME
+          a(href='/faq') ABOUT
+    div.divider-bar
     block content
   block scripts

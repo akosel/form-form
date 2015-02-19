@@ -16,7 +16,7 @@ window.FormHandler = function(args) {
 FormHandler.prototype = extend(FormHandler.prototype, {
   init: function() {
     var self = this;
-    this.options.$main      = document.createElement('main');
+    this.options.$main      = document.querySelector('main') || document.createElement('main');
     this.options.$container = document.createElement('section');
     this.options.$body      = document.querySelector('body');
     this.options.$bar       = document.querySelector('.progress-bar');
@@ -187,7 +187,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     setTimeout(function() {
       document.querySelector('.right.arrow').className = rClasses;
       document.querySelector('.left.arrow').className = lClasses;
-    }, 5000);
+    }, 1000);
   },
 
   // updates state for the form-form
@@ -205,7 +205,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
         this.buildData(step.$notificationsPanel);
       }
       this.options.$activeNotificationsPanel = step.$notificationsPanel;
-      this.options.$body.style.backgroundColor = step.bgColor;
+      this.options.$body.style.backgroundColor = step.bgColor || '#2980b9';
       this.updateProgressBar();
   },
 
@@ -403,6 +403,9 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     };
     xhr.send(JSON.stringify(json));
   }
+
+
+  // TODO localStorage sync
 
 });
 

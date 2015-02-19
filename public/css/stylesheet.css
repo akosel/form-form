@@ -36,6 +36,10 @@
   -o-animation: slideOutPrevious .25s;
   animation: slideOutPrevious .25s; }
 
+.planeContainer {
+  position: relative;
+  height: 100px; }
+
 .plane {
   position: absolute;
   color: white;
@@ -100,290 +104,248 @@
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-moz-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-ms-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-o-keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @keyframes slideInNext {
   from {
     margin-left: 100%;
     width: 300%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     width: 100%;
     opacity: 1; } }
-
 @-webkit-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-moz-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-ms-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-o-keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @keyframes slideOutNext {
   from {
     margin-left: 0%; }
-
   to {
     margin-left: -200%;
     opacity: 0; } }
-
 @-webkit-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-moz-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-ms-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-o-keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @keyframes slideInPrevious {
   from {
     margin-left: -200%;
     opacity: 0; }
-
   to {
     margin-left: 0%;
     opacity: 1; } }
-
 @-webkit-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-moz-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-ms-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-o-keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @keyframes slideOutPrevious {
   from {
     margin-left: 0%;
     opacity: 1; }
-
   to {
     margin-left: 100%;
     opacity: 0; } }
-
 @-webkit-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-moz-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-ms-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-o-keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @keyframes fadeInAndOut {
   0% {
     opacity: 0; }
-
   10% {
     opacity: 1; }
-
   100% {
     opacity: 0; } }
-
 @-webkit-keyframes flyAway {
   0% {
-    left: 0%;
+    left: -10%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
-
   100% {
     left: 100%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
-
 @-moz-keyframes flyAway {
   0% {
-    left: 0%;
+    left: -10%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
-
   100% {
     left: 100%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
-
 @-ms-keyframes flyAway {
   0% {
-    left: 0%;
+    left: -10%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
-
   100% {
     left: 100%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
-
 @-o-keyframes flyAway {
   0% {
-    left: 0%;
+    left: -10%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
-
   100% {
     left: 100%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
-
 @keyframes flyAway {
   0% {
-    left: 0%;
+    left: -10%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); }
-
   100% {
     left: 100%;
     top: 50vh;
     transform: scaleY(0.5) rotate(45deg); } }
+nav {
+  color: white;
+  background-color: #2980b9; }
+  nav .nav-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1em; }
+    nav .nav-content .logo-wrapper {
+      display: inline-block;
+      height: 90px; }
+      nav .nav-content .logo-wrapper img {
+        height: 80px; }
+    nav .nav-content .sub-nav {
+      display: inline-block;
+      float: right; }
+      nav .nav-content .sub-nav a {
+        line-height: 90px;
+        text-decoration: none;
+        color: white;
+        display: inline-block; }
+        nav .nav-content .sub-nav a:not(:first-child) {
+          margin-left: 30px; }
 
 body {
   font-family: "Gill Sans", Montserrat, Helvetica;
@@ -427,9 +389,18 @@ main article.box {
       font-size: 60px;
       font-size: 5.625vw; } }
 
+.divider-bar {
+  height: 0.5vh;
+  background-color: white;
+  width: 100%;
+  -webkit-transition: width 0.5s ease;
+  -moz-transition: width 0.5s ease;
+  -ms-transition: width 0.5s ease;
+  -o-transition: width 0.5s ease;
+  transition: width 0.5s ease; }
+
 .progress-bar {
-  position: fixed;
-  height: 1.5vh;
+  height: 2.5vh;
   background-color: white;
   width: 0;
   -webkit-transition: width 0.5s ease;
@@ -473,7 +444,7 @@ button {
   cursor: pointer;
   color: white;
   margin-top: 1em;
-  background-color: #27ae60;
+  background-color: #27AE60;
   font-size: 24px;
   font-size: 2.25vw;
   -webkit-transition: background-color 0.3s ease;
@@ -587,3 +558,5 @@ button {
 
     .custom-dropdown--small .custom-dropdown__select {
       padding-right: 0.5em; } } }
+
+/*# sourceMappingURL=stylesheet.css.map */

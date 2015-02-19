@@ -43,9 +43,15 @@ main {
 
 }
 
+.divider-bar {
+  height: 0.5vh;
+  background-color: white;
+  width: 100%;
+  @include transition(width .5s ease);
+}
+
 .progress-bar {
-  position: fixed;
-  height: 1.5vh;
+  height: 2.5vh;
   background-color: white;
   width: 0;
   @include transition(width .5s ease);

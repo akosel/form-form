@@ -1,9 +1,30 @@
 nav {
   color: white;
-}
-
-ul {
-  list-style-type: none;
-  li {
+  background-color: $blue;
+  .nav-content {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 1em;
+    .logo-wrapper {
+      display: inline-block;
+      height: 90px;
+      img {
+        height: 80px;
+      }
+    }
+    .sub-nav {
+      display: inline-block;
+      float: right;
+      a {
+        line-height: 90px;
+        text-decoration: none;
+        color: white;
+        display: inline-block;
+        &:not(:first-child) {
+          margin-left: 30px;
+        }
+      }
+    }
   }
 }
+

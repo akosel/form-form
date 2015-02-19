@@ -28,6 +28,10 @@ app.get('/', function(req, res) {
   res.render('home');
 });
 
+app.get('/faq', function(req, res) {
+  res.render('faq');
+});
+
 app.get('/form', function(req, res) {
   res.render('form-form');
 });
