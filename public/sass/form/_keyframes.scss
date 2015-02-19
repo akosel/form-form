@@ -30,7 +30,7 @@
   position: absolute;
   color: white;
   @include font-size(60px);
-  @include animation('flyAway 5s infinite linear');
+  @include animation('flyAway 10s infinite linear');
 }
 
 .building-1 {

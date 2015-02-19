@@ -45,11 +45,11 @@
   color: white;
   font-size: 60px;
   font-size: 5.625vw;
-  -webkit-animation: flyAway 5s infinite linear;
-  -moz-animation: flyAway 5s infinite linear;
-  -ms-animation: flyAway 5s infinite linear;
-  -o-animation: flyAway 5s infinite linear;
-  animation: flyAway 5s infinite linear; }
+  -webkit-animation: flyAway 10s infinite linear;
+  -moz-animation: flyAway 10s infinite linear;
+  -ms-animation: flyAway 10s infinite linear;
+  -o-animation: flyAway 10s infinite linear;
+  animation: flyAway 10s infinite linear; }
 
 .building-1 {
   position: absolute;

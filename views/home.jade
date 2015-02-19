@@ -3,6 +3,9 @@ extends template
 block content
   div.progress-bar
   main
+  //section
+  //  h1 Hey, what the hell is this?
+  //    p Hey yourself! This is VayKay.
   //main
   //  div
   //    i.fa.fa-building.fa-2x.building-1
@@ -48,32 +51,34 @@ block content
               }
             }
           ]
-        }, {
-          title: 'Dolla Dolla Bill Y\'all',
-          description: 'What is your ballpark budget (USD)?',
-          //bgColor: '#462255',
-          validButtonText: 'NEXT: TIMING',
-          formElements: [
-            {
-              tagName: 'input',
-              modelName: 'vacation',
-              attributes: {
-                placeholder: 'e.g. 1000 or 200 or 492',
-                name: 'cost',
-                required: true,
-                min: 1,
-                type: 'number',
-                autofocus: true
-              },
-              fn_print: function() {
-                return 'Costs: $' + this.value;
-              },
-              fn_dbFormat: function() {
-                return this.value;
-              }
-            }
-          ]
-        }, {
+        }, 
+       // {
+       //   title: 'Dolla Dolla Bill Y\'all',
+       //   description: 'What is your ballpark budget (USD)?',
+       //   //bgColor: '#462255',
+       //   validButtonText: 'NEXT: TIMING',
+       //   formElements: [
+       //     {
+       //       tagName: 'input',
+       //       modelName: 'vacation',
+       //       attributes: {
+       //         placeholder: 'e.g. 1000 or 200 or 492',
+       //         name: 'cost',
+       //         required: true,
+       //         min: 1,
+       //         type: 'number',
+       //         autofocus: true
+       //       },
+       //       fn_print: function() {
+       //         return 'Costs: $' + this.value;
+       //       },
+       //       fn_dbFormat: function() {
+       //         return this.value;
+       //       }
+       //     }
+       //   ]
+       // }, 
+        {
           title: 'Timing is everything',
           description: 'Roughly speaking, when do you want to go and for how long?',
           //bgColor: '#1C6B7C',
