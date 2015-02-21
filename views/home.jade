@@ -44,10 +44,10 @@ block content
                 autofocus: true
               },
               fn_print: function() {
-                return 'Location: ' + this.value;
+                return 'Location: ' + this.attributes.value;
               },
               fn_dbFormat: function() {
-                return this.value;
+                return this.attributes.value;
               }
             }
           ]
@@ -70,10 +70,10 @@ block content
        //         autofocus: true
        //       },
        //       fn_print: function() {
-       //         return 'Costs: $' + this.value;
+       //         return 'Costs: $' + this.attributes.value;
        //       },
        //       fn_dbFormat: function() {
-       //         return this.value;
+       //         return this.attributes.value;
        //       }
        //     }
        //   ]
@@ -96,19 +96,19 @@ block content
                 autofocus: true,
               },
               fn_print: function() {
-                var date = new Date(this.value);
+                var date = new Date(this.attributes.value);
                 return 'Around: ' + date.toLocaleDateString();
               },
               fn_dbFormat: function() {
-                var date = new Date(this.value);
+                var date = new Date(this.attributes.value);
                 return date;
               }
             },
             {
               tagName: 'select',
               modelName: 'vacation',
-              value: 'A week',
               attributes: {
+                value: 'A week',
                 name: 'duration'
               },
               options: [
@@ -119,10 +119,10 @@ block content
                 'A long, long time'
               ],
               fn_print: function() {
-                return 'Duration: ' + this.value;
+                return 'Duration: ' + this.attributes.value;
               },
               fn_dbFormat: function() {
-                return this.value;
+                return this.attributes.value;
               }
             }
           ]
@@ -144,10 +144,10 @@ block content
                 autofocus: true
               },
               fn_print: function() {
-                return this.value;
+                return this.attributes.value;
               },
               fn_dbFormat: function() {
-                return this.value;
+                return this.attributes.value;
               }
             }
           ]

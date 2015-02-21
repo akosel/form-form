@@ -10,6 +10,7 @@ window.FormHandler = function(args) {
   };
   this.options = extend(this.defaults, args);
 
+  this.loadState();
   this.init();
 };
 
@@ -127,10 +128,10 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     }
 
     inputObj.$input.addEventListener('keyup', function() {
-      inputObj.value = inputObj.$input.value;
+      inputObj.attributes.value = inputObj.$input.value;
     });
     inputObj.$input.addEventListener('focusout', function() {
-      inputObj.value = inputObj.$input.value;
+      inputObj.attributes.value = inputObj.$input.value;
     });
 
     $target.appendChild(inputObj.$input);
@@ -151,7 +152,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       selectObj.$select[attributes[i]] = selectObj.attributes[attributes[i]];
     }
     selectObj.$select.addEventListener('onchange', function() {
-      selectObj.value = inputObj.$select.value;
+      selectObj.attributes.value = inputObj.$select.value;
     });
 
     var $newOpt;
@@ -332,6 +333,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
   // move to the next step
   next: function() {
+    var self = this;
     if (this.options.$activeForm && !this.options.$activeForm.checkValidity()) {
       this.sendNotification('Whoops, looks like you still need to fill in a field!');
       return;
@@ -339,10 +341,15 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       return;
     } else if (this.options.activeStep === this.options.steps.length - 1) {
       this.submitted = true;
-      this.post('/vacations', this.getPostData('vacation'), function(xhr) { var data = JSON.parse(xhr.responseText); window.location = data.redirect; });
+      this.post('/vacations', this.getPostData('vacation'), function(xhr) { 
+        var data = JSON.parse(xhr.responseText); 
+        self.clearState();
+        window.location = data.redirect; 
+      });
       return;
     }
     this.options.activeStep += 1; 
+    this.saveState();
     this.options.$container.className = 'slide-out-next';
   },
 
@@ -402,10 +409,38 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       }
     };
     xhr.send(JSON.stringify(json));
+  },
+
+  saveState: function() {
+    var formState = {};
+    formState.formElementValues = [];
+    var valArray = [];
+    for (var i = 0; i < this.options.steps.length; i += 1) {
+      valArray = this.options.steps[i].formElements.map(function(el) { console.log(el); return el.attributes.value; });
+      console.log(valArray);
+      formState.formElementValues.push(valArray);
+    }
+    formState.activeStep = this.options.activeStep;
+    localStorage.setItem('formState', JSON.stringify(formState));
+  },
+
+  loadState: function() {
+    var formState = JSON.parse(localStorage.getItem('formState')); 
+    if (!formState) {
+      return;
+    }
+    this.options.activeStep = formState.activeStep;
+
+    for (var i = 0; i < this.options.steps.length; i += 1) {
+      for (var j = 0; j < this.options.steps[i].formElements.length; j += 1) {
+        this.options.steps[i].formElements[j].attributes.value = formState.formElementValues[i][j];
+      }
+    }
+  },
+
+  clearState: function() {
+    localStorage.removeItem('formState');
   }
-
-
-  // TODO localStorage sync
 
 });
 
