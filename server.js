@@ -32,6 +32,15 @@ app.get('/faq', function(req, res) {
   res.render('faq');
 });
 
+app.get('/dashboard', function(req, res) {
+  Vacation.find({}, function(err, vacations) {
+    var allLocations = vacations.map(function(l) { return l.location; })
+    var locations    = allLocations.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
+    console.log('locations >>> ', locations);
+    res.render('dashboard', { locs: locations });
+  });
+});
+
 app.get('/form', function(req, res) {
   res.render('form-form');
 });

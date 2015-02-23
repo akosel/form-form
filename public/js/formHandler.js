@@ -8,13 +8,13 @@ window.FormHandler = function(args) {
       title: 'You should initialize this with some steps'
     }] 
   };
-  this.options = extend(this.defaults, args);
+  this.options = util.extend(this.defaults, args);
 
   this.loadState();
   this.init();
 };
 
-FormHandler.prototype = extend(FormHandler.prototype, {
+FormHandler.prototype = util.extend(FormHandler.prototype, {
   init: function() {
     var self = this;
     this.options.$main      = document.querySelector('main') || document.createElement('main');
@@ -25,13 +25,13 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     this.options.$body.appendChild(this.options.$main);
 
     // set listener for animation starts across the page. 
-    PrefixedEvent(self.options.$container, 'AnimationStart', function(e) {
+    util.PrefixedEvent(self.options.$container, 'AnimationStart', function(e) {
       console.log('PROCESSING: ', e);
       self.options.processing = true;
     });
 
     // catch all animation events. special case for the container. a little messy.
-    PrefixedEvent(self.options.$container, 'AnimationEnd', function(e) {
+    util.PrefixedEvent(self.options.$container, 'AnimationEnd', function(e) {
       var classNameArr = self.options.$container.className.split('-');
       if (self.options.$container.className.match('slide-out')) {
         self.buildBox(self.options.activeStep, function() {
@@ -303,7 +303,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     step.$box.appendChild(step.$notificationsPanel);
 
     // add listener for animations on the notifications panel
-    PrefixedEvent(step.$notificationsPanel, 'AnimationEnd', function(e) {
+    util.PrefixedEvent(step.$notificationsPanel, 'AnimationEnd', function(e) {
       self.clearNotification();
     }, true);
 
@@ -341,7 +341,7 @@ FormHandler.prototype = extend(FormHandler.prototype, {
       return;
     } else if (this.options.activeStep === this.options.steps.length - 1) {
       this.submitted = true;
-      this.post('/vacations', this.getPostData('vacation'), function(xhr) { 
+      util.post('/vacations', this.getPostData('vacation'), function(xhr) { 
         var data = JSON.parse(xhr.responseText); 
         self.clearState();
         window.location = data.redirect; 
@@ -395,28 +395,12 @@ FormHandler.prototype = extend(FormHandler.prototype, {
     return formData;
   },
 
-  // post some json to a given url. this really doesn't belong in the form handler XXX 
-  post: function(url, json, callback) {
-    var xhr = new XMLHttpRequest();
-    xhr.open('POST', url);
-    xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8"); 
-    xhr.onreadystatechange = function() {
-      if (xhr.status === 200 && xhr.readyState === 4) {
-        console.log('xhr: ', xhr);
-        if (callback) {
-          callback(xhr);
-        }
-      }
-    };
-    xhr.send(JSON.stringify(json));
-  },
-
   saveState: function() {
     var formState = {};
     formState.formElementValues = [];
     var valArray = [];
     for (var i = 0; i < this.options.steps.length; i += 1) {
-      valArray = this.options.steps[i].formElements.map(function(el) { console.log(el); return el.attributes.value; });
+      valArray = this.options.steps[i].formElements.map(function(el) { return el.attributes.value; });
       console.log(valArray);
       formState.formElementValues.push(valArray);
     }
@@ -446,34 +430,3 @@ FormHandler.prototype = extend(FormHandler.prototype, {
 
 })(window);
 
-// TODO put these utility functions in a separate place
-var pfx = ["webkit", "moz", "MS", "o", ""];
-function PrefixedEvent(element, type, callback, useCapture) {
-  useCapture = useCapture || false;
-  for (var p = 0; p < pfx.length; p++) {
-    if (!pfx[p]) type = type.toLowerCase();
-    element.addEventListener(pfx[p]+type, callback, useCapture);
-  }
-}
-/**
- *  Merge defaults with user options
- *  @private
- *  @param {Object} defaults Default settings
- *  @param {Object} options User options
- *  @returns {Object} Merged values of defaults and options
- */
-function extend( defaults, options ) {
-  var extended = {};
-  var prop;
-  for (prop in defaults) {
-    if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
-      extended[prop] = defaults[prop];
-    }
-  }
-  for (prop in options) {
-    if (Object.prototype.hasOwnProperty.call(options, prop)) {
-      extended[prop] = options[prop];
-    }
-  }
-  return extended;
-}

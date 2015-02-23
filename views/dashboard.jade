@@ -1,0 +1,13 @@
+extends template
+
+block content
+  main
+    article.box
+      h1 People like you are traveling all over the world!
+      for l in locs 
+        p #{ l }
+
+
+block scripts
+  script(type="text/javascript", src="https://maps.googleapis.com/maps/api/js?libraries=places")
+  script(src='/js/util.js')
