@@ -119,7 +119,7 @@ FormHandler.prototype = util.extend(FormHandler.prototype, {
     
     for (var i = 0; i < attributes.length; i += 1) {
       if (attributes[i] === 'places') {
-        var autocomplete = new google.maps.places.Autocomplete(inputObj.$input, { types: ['geocode'] });
+        var autocomplete = new google.maps.places.Autocomplete(inputObj.$input, { types: ['(cities)'] });
       } else if (attributes[i].match('fn')) {
         continue; 
       } else {

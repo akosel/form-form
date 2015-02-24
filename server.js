@@ -3,6 +3,9 @@ var app = express();
 var server = require('http').Server(app);
 var bodyParser = require('body-parser');
 
+var gm = require('googlemaps');
+var util = require('util');
+
 var mongoose = require('mongoose');
 var Vacation = require('./models/Vacation.js');
 var User = require('./models/User.js');
@@ -28,6 +31,7 @@ app.get('/', function(req, res) {
   res.render('home');
 });
 
+
 app.get('/faq', function(req, res) {
   res.render('faq');
 });
@@ -37,6 +41,24 @@ app.get('/dashboard', function(req, res) {
     var allLocations = vacations.map(function(l) { return l.location; })
     var locations    = allLocations.filter(function(item, i, ar){ return ar.indexOf(item) === i; });
     console.log('locations >>> ', locations);
+
+//var getComponents = function(place) {
+    var myPlace = [];
+    place = 'Thailand';
+    gm.geocode(place, function(err, data){
+      console.log('loaded');
+
+      var address_components = data.results[0].address_components;
+
+      for (var i = 0; i < address_components.length; i += 1) {
+        if (address_components[i].types.indexOf('country') > -1 || address_components[i].types.indexOf('administrative_area_level_1') > -1) {
+          console.log(address_components[i]);
+          myPlace.push(address_components[i]);
+        }
+      }
+      console.log('my place', myPlace);
+    });
+//  }
     res.render('dashboard', { locs: locations });
   });
 });
