@@ -37,15 +37,6 @@ app.get('/faq', function(req, res) {
   res.render('faq');
 });
 
-//app.get('/dashboard', function(req, res) {
-//  Vacation.distinct('location', function(err, vacations) {
-//    console.log(vacations);
-//    lh.geocode(vacations[0], function() {
-//      res.render('dashboard', { locs: vacations });
-//    });
-//  });
-//});
-
 app.get('/dashboard', function(req, res) {
   var o = {};
   o.map = function() { emit(this.country, 1); };
@@ -91,7 +82,7 @@ app.route('/vacations')
           req.body.createdBy = user.id;
           req.body.location = newLocation.id;
           Vacation.create(req.body, function(err, v) {
-            res.send({ redirect: '/complete' });
+            res.send({ redirect: '/dashboard' });
           });
         });
       });
