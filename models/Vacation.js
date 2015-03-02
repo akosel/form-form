@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var vacationSchema = new mongoose.Schema({
   createdBy: { ref: 'User', type: mongoose.Schema.ObjectId },
-  location: String,
+  location: { ref: 'Location', type: mongoose.Schema.ObjectId },
   duration: String, 
   cost: Number,
   date: Date

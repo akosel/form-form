@@ -5,7 +5,7 @@ block content
     article.box
       h1 People like you are traveling all over the world!
       for l in locs 
-        p #{ l }
+        p #{ l._id }: #{ l.value }
 
 
 block scripts
