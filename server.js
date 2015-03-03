@@ -37,14 +37,8 @@ app.get('/faq', function(req, res) {
   res.render('faq');
 });
 
-app.get('/dashboard', function(req, res) {
-  var o = {};
-  o.map = function() { emit(this.country, 1); };
-  o.reduce = function(k, vals) { return vals.length; };
-  Location.mapReduce(o, function(err, data, stats) {
-    console.log(stats);
-    res.render('dashboard', { locs: data });
-  });
+app.get('/map', function(req, res) {
+  res.render('map');
 });
 
 app.get('/form', function(req, res) {
@@ -55,14 +49,31 @@ app.get('/complete', function(req, res) {
   res.render('complete');
 });
 
+
+// aggregate all location data. good to use for a map, perhaps.
+app.get('/dashboard', function(req, res) {
+  var o = {};
+  o.map = function() { emit(this.country, 1); };
+  o.reduce = function(k, vals) { return vals.length; };
+  Location.mapReduce(o, function(err, data, stats) {
+    console.log(stats, data);
+    data = data.sort(function(a, b) {
+      return b.value - a.value;
+    });
+    res.render('dashboard', { locs: data });
+  });
+});
+
+// API endpoints
 app.route('/vacations')
   .get(function(req, res) {
     Vacation.find({}, function(err, v) {
-      res.send(JSON.stringify(v));
+      res.send(v);
     });
   })
   .post(function(req, res) {
 
+    // XXX so complicated...
     var user = new User({
       email: req.body.email
     });
@@ -88,6 +99,19 @@ app.route('/vacations')
       });
     });
   });
+
+app.get('/vacations/summary', function(req, res) {
+  var o = {};
+  o.map = function() { emit(this.country, 1); };
+  o.reduce = function(k, vals) { return vals.length; };
+  Location.mapReduce(o, function(err, data, stats) {
+    var bundle = {}
+    data.forEach(function(v) {
+      bundle[v._id] = v.value;
+    });
+    res.send(bundle);
+  });
+});
 
 app.route('/users')
   .post(function(req, res) {

@@ -11,6 +11,8 @@ module.exports = function() {
 
         var wanted = ['country', 'administrative_area_level_1', 'administrative_area_level_2', 'administrative_area_level_3'];
         var placeObj = {};
+        var latlng = data.results[0].geometry.location;
+        placeObj['latlng'] = [latlng.lat, latlng.lng];
         var sample = address_components.filter(function(item, i) {
           var types = address_components[i].types;
           var isWanted = wanted.some(function(w) {
@@ -25,6 +27,7 @@ module.exports = function() {
         });
 
         if (callback) {
+          console.log(placeObj);
           callback(placeObj);
         }
       });

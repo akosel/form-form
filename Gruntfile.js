@@ -10,7 +10,8 @@ module.exports = function(grunt) {
       dist: {
         files: {
           'public/css/stylesheet.css': 'public/sass/form/form.scss',
-          'public/css/font-awesome.css': 'public/sass/font-awesome/font-awesome.scss'
+          'public/css/font-awesome.css': 'public/sass/font-awesome/font-awesome.scss',
+          'public/css/map.css': 'public/sass/map/map.scss'
         }
       }
     },
