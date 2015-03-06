@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').Server(app);
 var bodyParser = require('body-parser');
 
-var lh = require('./public/js/LocationHandler')();
+var lh = require('./public/js/locationHandler')();
 var util = require('util');
 
 var mongoose = require('mongoose');
@@ -93,7 +93,7 @@ app.route('/vacations')
           req.body.createdBy = user.id;
           req.body.location = newLocation.id;
           Vacation.create(req.body, function(err, v) {
-            res.send({ redirect: '/dashboard' });
+            res.send({ redirect: '/map' });
           });
         });
       });

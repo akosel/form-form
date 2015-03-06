@@ -20,7 +20,8 @@ FormHandler.prototype = util.extend(FormHandler.prototype, {
     this.options.$main      = document.querySelector('main') || document.createElement('main');
     this.options.$container = document.createElement('section');
     this.options.$body      = document.querySelector('body');
-    this.options.$bar       = document.querySelector('.progress-bar');
+    this.options.$bar       = document.querySelector('.progress-bar') || document.createElement('div');
+    this.options.$bar.className = 'progress-bar';
     this.options.$main.appendChild(this.options.$container);
     this.options.$body.appendChild(this.options.$main);
 
@@ -119,7 +120,7 @@ FormHandler.prototype = util.extend(FormHandler.prototype, {
     
     for (var i = 0; i < attributes.length; i += 1) {
       if (attributes[i] === 'places') {
-        var autocomplete = new google.maps.places.Autocomplete(inputObj.$input, { types: ['(cities)'] });
+        var autocomplete = new google.maps.places.Autocomplete(inputObj.$input, { types: ['(regions)'] });
       } else if (attributes[i].match('fn')) {
         continue; 
       } else {

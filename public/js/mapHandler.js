@@ -28,8 +28,13 @@ function setup(width,height){
 
 d3.json("data/world-topo-min.json", function(error, world) {
   var countries = topojson.feature(world, world.objects.countries).features;
-  topo = countries;
-  draw(topo);
+  d3.json('/vacations/summary', function(error, bundle) {
+    countries.forEach(function(country) {
+      country.properties.value = bundle[country.properties.name] || 0;
+    });
+    topo = countries;
+    draw(topo);
+  });
 });
 
 function draw(topo) {
@@ -47,20 +52,130 @@ function draw(topo) {
     .attr("d", path)
     .attr("id", function(d,i) { return d.id; })
     .attr("title", function(d,i) { return d.properties.name; })
-    .style("fill", function(d, i) { return '#eee'; });
+    .style("fill", function(d, i) { return d.properties.value > 0 ? '#e74c3c' : '#eee'; });
   //offsets for tooltips
   var offsetL = document.getElementById('container').offsetLeft+20;
   var offsetT = document.getElementById('container').offsetTop+10;
   //tooltips
   country
     .on("mousemove", function(d,i) {
+      var noun = d.properties.value === 1 ? 'traveler' : 'travelers';
       var mouse = d3.mouse(svg.node()).map( function(d) { return parseInt(d); } );
       tooltip.classed("hidden", false)
       .attr("style", "left:"+(mouse[0]+offsetL)+"px;top:"+(mouse[1]+offsetT)+"px")
-      .html(d.properties.name);
+      .html([d.properties.name, ':', d.properties.value, noun].join(' '));
     })
     .on("mouseout",  function(d,i) {
       tooltip.classed("hidden", true);
+    })
+    .on("click", function(d, i) {
+      console.log(d.properties.name);
+    var app = [{
+          title: 'Location. Location. Location.',
+          description: 'Where do you want to go?',
+          //bgColor: '#e67e22',
+          validButtonText: 'NEXT: COSTS',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'e.g. Timbuktu or Thailand',
+                type: 'text',
+                name: 'location',
+                value: d.properties.name,
+                required: true,
+                places: true,
+                autofocus: true
+              },
+              fn_print: function() {
+                return 'Location: ' + this.attributes.value;
+              },
+              fn_dbFormat: function() {
+                return this.attributes.value;
+              }
+            }
+          ]
+        }, {
+          title: 'Timing is everything',
+          description: 'Roughly speaking, when do you want to go and for how long?',
+          //bgColor: '#1C6B7C',
+          validButtonText: 'NEXT: REVIEW',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                type: 'date',
+                min: [(new Date()).getFullYear(), ("0" + (new Date()).getMonth()).slice(-2), ("0" + (new Date()).getDate()).slice(-2)].join('-'),
+                max: '2100-01-01',
+                required: true,
+                name: 'date',
+                autofocus: true,
+              },
+              fn_print: function() {
+                var date = new Date(this.attributes.value);
+                return 'Around: ' + date.toLocaleDateString();
+              },
+              fn_dbFormat: function() {
+                var date = new Date(this.attributes.value);
+                return date;
+              }
+            },
+            {
+              tagName: 'select',
+              modelName: 'vacation',
+              attributes: {
+                value: 'A week',
+                name: 'duration'
+              },
+              options: [
+                'A week',
+                'Two Weeks',
+                'Three Weeks',
+                'A month',
+                'A long, long time'
+              ],
+              fn_print: function() {
+                return 'Duration: ' + this.attributes.value;
+              },
+              fn_dbFormat: function() {
+                return this.attributes.value;
+              }
+            }
+          ]
+        }, {
+          title: 'This is it.',
+          description: 'Ok, after you review everything, enter your email below.',
+          validButtonText: 'ALL DONE',
+          showData: true,
+          //bgColor: '#125E3B',
+          formElements: [
+            {
+              tagName: 'input',
+              modelName: 'vacation',
+              attributes: {
+                placeholder: 'What is your email?',
+                name: 'email',
+                required: true,
+                type: 'email',
+                autofocus: true
+              },
+              fn_print: function() {
+                return this.attributes.value;
+              },
+              fn_dbFormat: function() {
+                return this.attributes.value;
+              }
+            }
+          ]
+    }];
+
+
+    var form = new FormHandler({
+      activeStep: 0,
+      steps: app
+    });
     });
   //EXAMPLE: adding some capitals from external CSV file
   d3.csv("data/country-capitals.csv", function(err, capitals) {
